@@ -1,0 +1,17 @@
+{
+  "name": "linked-vp",
+  "version": "0.0.1",
+  "description": "Linked Verifiable Presentations Specification",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/decentralized-identity/linked-vp.git"
+  },
+  "license": "Apache 2",
+  "homepage": "https://identity.foundation/linked-vp",
+  "dependencies": {
+    "spec-up": "^0.10.6"
+  },
+  "scripts": {
+    "edit": "node -e \"require('spec-up')()\""
+  }
+}
