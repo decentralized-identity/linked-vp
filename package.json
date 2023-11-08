@@ -11,6 +11,9 @@
   "dependencies": {
     "spec-up": "^0.10.6"
   },
+  "bugs": {
+    "url": "https://github.com/decentralized-identity/linked-vp/issues"
+  },
   "scripts": {
     "edit": "node -e \"require('spec-up')()\""
   }
