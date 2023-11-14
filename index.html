@@ -78,6 +78,26 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 </dd>
 </dl>
 <hr>
+<h2 id="motivation"><a class="toc-anchor" href="#motivation" >§</a> Motivation</h2>
+<p>Currently, there are multiple specifications for discovering DIDs that are accosiated with DNS names, see
+<a href="#references" >references</a>. However, there’s currently no specification that makes Verifiable Presentations and
+Credentials discoverable that belong to a DID or to a DNS name.</p>
+<p>Currently, the only way an application or web service can access VCs of a DID is to use a data exchange protocol like
+<a path-0="openid.net"path-1="openid4vc"path-2=""href="https://openid.net/openid4vc/" >OpenID4VC</a> or <a path-0="didcomm.org"path-1=""href="https://didcomm.org/" >DIDComm</a> to request and receive the desired
+credential. While this data exchange is important for VCs that shall be kept private, Holders might desire to make other
+VCs public. For public VCs the required data exchange increases the complexity of applications that want to discover and
+access these VCs because the application would need to implement a data exchange protocol.</p>
+<h2 id="proposed-work-item"><a class="toc-anchor" href="#proposed-work-item" >§</a> Proposed work item</h2>
+<p>This proposal proposes to create a specification for linking Verifiable Credentials to a DID via the
+<a path-0="w3c.github.io"path-1="did-core"path-2="#services"href="https://w3c.github.io/did-core/#services" >services section in the DID Document</a>.</p>
+<p>The goal of this specification is to simplify discovery and retrieval of published Verifiable Credentials.</p>
+<h2 id="potential-use-cases"><a class="toc-anchor" href="#potential-use-cases" >§</a> Potential Use Cases</h2>
+<ul>
+<li>Linking an official business registration credential (if there was such a thing) to a DNS name to reduce the burden of
+verifying the authenticity of a website.</li>
+<li>Making the mandatory imprint page on a website machine readable by self-issuing an imprint credential and connecting
+it to the DID of the website to reduce the burden of vistors to extract relevant data from the imprint page.</li>
+</ul>
 <h2 id="abstract"><a class="toc-anchor" href="#abstract" >§</a> Abstract</h2>
 <p>Verifiable Credentials are designed to be shared between entities. How this is done via private communication channels
 is specified by protocols like <a href="#ref:DIDCOMM-MESSAGING" >DIDComm</a> and
@@ -198,6 +218,43 @@ MUST comply with relevant normative statements in that section.</p>
 <ul>
 <li><a path-0="w3c.github.io"path-1="did-spec-registries"path-2="#credentialregistry"href="https://w3c.github.io/did-spec-registries/#credentialregistry" >CredentialRegistry</a></li>
 </ul>
+<h3 id="other-work-to-consider"><a class="toc-anchor" href="#other-work-to-consider" >§</a> Other work to consider</h3>
+<ul>
+<li>The
+<a path-0="trustoverip.github.io"path-1="tswg-did-method-webs-specification"path-2="index.html#signed-files"href="https://trustoverip.github.io/tswg-did-method-webs-specification/index.html#signed-files" >did:webs Method Specification</a>
+defines how the DID URL path is to be used for resolving signed files in general, and files of VCs and VPs in
+particular. Notably:
+<ul>
+<li>A DID URL of the form <code>&lt;did&gt;/path/to/file</code> resolves to a file, and MUST have beside it a <code>&lt;did&gt;/path/to/file.jws</code> a
+JWS of the hash of the file signed by the controlling DID.</li>
+<li>This approach is extremely easy with a web-based DID Method (transform the DID into an HTTPS URL and <code>GET</code>), but can
+be used by any DID Method.</li>
+<li>Using the DID URL <code>whois</code> path MAY return a Verifiable Presentation that contains an array of Verifiable Credentials
+all of which must have the DID as the credential subject. The Verifiable Presentation proof is signed by DID.</li>
+</ul>
+</li>
+<li><a path-0="w3c.github.io"path-1="did-spec-registries"path-2="#service-types"href="https://w3c.github.io/did-spec-registries/#service-types" >DID Specification Registries - Service types</a></li>
+<li>The <a path-0="w3c.github.io"path-1="did-spec-registries"path-2="#credentialregistry"href="https://w3c.github.io/did-spec-registries/#credentialregistry" >Service type - CredentialRegistry</a> specification
+provides a similar use case. They’re focused on Verifiable Credentials that are issued by a third party. This
+proposal’s focus on Verifiable Presentations would allow the holder to have more control over the published credential
+by signing the presentation and potentially limiting it to a certain domain name, etc.</li>
+<li>X.509 certificates contain information about the issuing and holding party. With this proposal a DID + VC could
+provide the same functionality.</li>
+<li><a path-0="github.com"path-1="identinet"path-2="identinet-plugin"href="https://github.com/identinet/identinet-plugin" >identinet-plugin</a> is a browser add-on that demonstrates how Well Known
+DID and VC data can be leveraged for the end user.</li>
+<li>Verifiable Credentials are independent of DIDs, therefore it should be considered to make the DID linking aspect
+optional / make the specification useful even if no DID is used.</li>
+</ul>
+<h3 id="other-references"><a class="toc-anchor" href="#other-references" >§</a> Other References</h3>
+<ul>
+<li><a path-0="datatracker.ietf.org"path-1="doc"path-2="draft-mayrhofer-did-dns"path-3=""href="https://datatracker.ietf.org/doc/draft-mayrhofer-did-dns/" >The Decentralized Identifier (DID) in the DNS</a> specifies
+the use of the URI Resource Record Type to publish Decentralized Identifiers (DIDs) in the Domain Name System.</li>
+<li>The <a path-0="w3c-ccg.github.io"path-1="did-method-web"path-2=""href="https://w3c-ccg.github.io/did-method-web/" >did:web Method Specification</a> defines how to discover a did:web DID
+for a DNS name (unidirectional) via the <code>/.well-known/did.json</code> path.</li>
+<li>The <a path-0="identity.foundation"path-1=".well-known"path-2="resources"path-3="did-configuration"path-4=""href="https://identity.foundation/.well-known/resources/did-configuration/" >Well Known DID Configuration</a> specification
+defines how to create a bi-directional relationship between a DID, independent of the DID method, and a DNS name via
+the <code>/.well-known/did-configuration.json</code> path.</li>
+</ul>
 
                     </article>    
       
@@ -222,6 +279,9 @@ MUST comply with relevant normative statements in that section.</p>
                       </header>
                       <div id="toc_list">
                         <ul class="toc">
+<li><a href="#motivation" >Motivation</a></li>
+<li><a href="#proposed-work-item" >Proposed work item</a></li>
+<li><a href="#potential-use-cases" >Potential Use Cases</a></li>
 <li><a href="#abstract" >Abstract</a></li>
 <li><a href="#status-of-this-document" >Status of This Document</a></li>
 <li><a href="#terminology" >Terminology</a></li>
@@ -241,6 +301,8 @@ MUST comply with relevant normative statements in that section.</p>
 <li><a href="#appendix" >Appendix</a>
 <ul>
 <li><a href="#other-resources" >Other Resources</a></li>
+<li><a href="#other-work-to-consider" >Other work to consider</a></li>
+<li><a href="#other-references" >Other References</a></li>
 </ul>
 </li>
 </ul>

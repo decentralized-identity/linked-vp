@@ -28,6 +28,32 @@
 
 ---
 
+## Motivation
+
+Currently, there are multiple specifications for discovering DIDs that are accosiated with DNS names, see
+[references](#references). However, there's currently no specification that makes Verifiable Presentations and
+Credentials discoverable that belong to a DID or to a DNS name.
+
+Currently, the only way an application or web service can access VCs of a DID is to use a data exchange protocol like
+[OpenID4VC](https://openid.net/openid4vc/) or [DIDComm](https://didcomm.org/) to request and receive the desired
+credential. While this data exchange is important for VCs that shall be kept private, Holders might desire to make other
+VCs public. For public VCs the required data exchange increases the complexity of applications that want to discover and
+access these VCs because the application would need to implement a data exchange protocol.
+
+## Proposed work item
+
+This proposal proposes to create a specification for linking Verifiable Credentials to a DID via the
+[services section in the DID Document](https://w3c.github.io/did-core/#services).
+
+The goal of this specification is to simplify discovery and retrieval of published Verifiable Credentials.
+
+## Potential Use Cases
+
+- Linking an official business registration credential (if there was such a thing) to a DNS name to reduce the burden of
+  verifying the authenticity of a website.
+- Making the mandatory imprint page on a website machine readable by self-issuing an imprint credential and connecting
+  it to the DID of the website to reduce the burden of vistors to extract relevant data from the imprint page.
+
 ## Abstract
 
 Verifiable Credentials are designed to be shared between entities. How this is done via private communication channels
@@ -119,3 +145,37 @@ Implementations MUST comply with relevant normative statements in DID Configurat
 The following projects are working on Linked Verifiable Presentations and Credentials.
 
 - [CredentialRegistry](https://w3c.github.io/did-spec-registries/#credentialregistry)
+
+### Other work to consider
+
+- The
+  [did:webs Method Specification](https://trustoverip.github.io/tswg-did-method-webs-specification/index.html#signed-files)
+  defines how the DID URL path is to be used for resolving signed files in general, and files of VCs and VPs in
+  particular. Notably:
+  - A DID URL of the form `<did>/path/to/file` resolves to a file, and MUST have beside it a `<did>/path/to/file.jws` a
+    JWS of the hash of the file signed by the controlling DID.
+  - This approach is extremely easy with a web-based DID Method (transform the DID into an HTTPS URL and `GET`), but can
+    be used by any DID Method.
+  - Using the DID URL `whois` path MAY return a Verifiable Presentation that contains an array of Verifiable Credentials
+    all of which must have the DID as the credential subject. The Verifiable Presentation proof is signed by DID.
+- [DID Specification Registries - Service types](https://w3c.github.io/did-spec-registries/#service-types)
+- The [Service type - CredentialRegistry](https://w3c.github.io/did-spec-registries/#credentialregistry) specification
+  provides a similar use case. They're focused on Verifiable Credentials that are issued by a third party. This
+  proposal's focus on Verifiable Presentations would allow the holder to have more control over the published credential
+  by signing the presentation and potentially limiting it to a certain domain name, etc.
+- X.509 certificates contain information about the issuing and holding party. With this proposal a DID + VC could
+  provide the same functionality.
+- [identinet-plugin](https://github.com/identinet/identinet-plugin) is a browser add-on that demonstrates how Well Known
+  DID and VC data can be leveraged for the end user.
+- Verifiable Credentials are independent of DIDs, therefore it should be considered to make the DID linking aspect
+  optional / make the specification useful even if no DID is used.
+
+### Other References
+
+- [The Decentralized Identifier (DID) in the DNS](https://datatracker.ietf.org/doc/draft-mayrhofer-did-dns/) specifies
+  the use of the URI Resource Record Type to publish Decentralized Identifiers (DIDs) in the Domain Name System.
+- The [did:web Method Specification](https://w3c-ccg.github.io/did-method-web/) defines how to discover a did:web DID
+  for a DNS name (unidirectional) via the `/.well-known/did.json` path.
+- The [Well Known DID Configuration](https://identity.foundation/.well-known/resources/did-configuration/) specification
+  defines how to create a bi-directional relationship between a DID, independent of the DID method, and a DNS name via
+  the `/.well-known/did-configuration.json` path.
