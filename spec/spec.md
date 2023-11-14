@@ -78,11 +78,61 @@ on GitHub (see above) and other mediums (e.g. DIF) where this work is being done
 
 ## Linked Verifiable Presentation Service Endpoint
 
-TODO
+To enable discovery of linked verifiable presentations from the resolution of a DID, there must exist a DID Document
+mechanism for expressing locations where Verifiable Presentations MAY be located. To that end, the following section
+codifies the `LinkedVerifiablePresentations` Service Endpoint, which allows a DID controller to specify a list of
+presentations over which they assert control. Presentations asserted within the `LinkedVerifiablePresentations` endpoint
+descriptor can then be subsequently crawled by verifying parties to locate and verify any Verifiable Presentation
+resources that may exist.
+
+### Example
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://identity.foundation/linked-vp/v1"
+  ],
+  "id": "did:example:123",
+  "verificationMethod": [{
+    "id": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+    "type": "JsonWebKey2020",
+    "controller": "did:example:123",
+    "publicKeyJwk": {
+      "kty": "OKP",
+      "crv": "Ed25519",
+      "x": "VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ"
+    }
+  }],
+  "service": [
+    {
+      "id": "did:example:123#foo",
+      "type": "LinkedVerifiablePresentations",
+      "serviceEndpoint": {
+        "presentations": [
+          "https://foo.example.com/verifiable-presentation.jsonld",
+          "https://identity.foundation/presentation.json"
+        ]
+      }
+    },
+    {
+      "id": "did:example:123#bar",
+      "type": "LinkedVerifiablePresentations",
+      "serviceEndpoint": "https://bar.example.com/verifiable-presentation.jwt"
+    }
+  ]
+}
+```
 
 ### Linked Verifiable Presentations
 
-TODO
+`LinkedVerifiablePresentations` endpoint descriptors are JSON objects composed as follows:
+
+- The object MUST contain an `id` property, and its value MUST be a valid DID URL reference.
+- The object MUST contain a `type` property, and its value MUST be the string "LinkedVerifiablePresentations".
+- The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an object that contains
+  `presentations` as property, the value of which MUST be an array of one or more Uniform Resource Locators as described
+  in [[spec:RFC3986]].
 
 ## Conformance
 
