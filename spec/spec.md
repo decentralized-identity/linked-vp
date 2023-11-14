@@ -40,13 +40,6 @@ credential. While this data exchange is important for VCs that shall be kept pri
 VCs public. For public VCs the required data exchange increases the complexity of applications that want to discover and
 access these VCs because the application would need to implement a data exchange protocol.
 
-## Proposed work item
-
-This proposal proposes to create a specification for linking Verifiable Credentials to a DID via the
-[services section in the DID Document](https://w3c.github.io/did-core/#services).
-
-The goal of this specification is to simplify discovery and retrieval of published Verifiable Credentials.
-
 ## Potential Use Cases
 
 - Linking an official business registration credential (if there was such a thing) to a DNS name to reduce the burden of
@@ -59,7 +52,7 @@ The goal of this specification is to simplify discovery and retrieval of publish
 Verifiable Credentials are designed to be shared between entities. How this is done via private communication channels
 is specified by protocols like [DIDComm](#ref:DIDCOMM-MESSAGING) and
 [OIDC4VC](#ref:OPENID-4-VERIFIABLE-CREDENTIAL-ISSUANCE). This document complements the private communication channel by
-defining how to share Verifiable Credentials publicly via a serivce entry in a "DID Document".
+defining how to share, discover and retrieve Verifiable Credentials publicly via a service entry in a "DID Document".
 
 The Verifiable Credentials specification supports multiple different identifiers. This specification does NOT specify
 how to publish Verifiable Credentials for other valid identifiers apart from DIDs.
