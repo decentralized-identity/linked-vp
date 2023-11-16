@@ -72,6 +72,7 @@ on GitHub (see above) and other mediums (e.g. DIF) where this work is being done
 | :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Decentralized Identifier (DID) | A globally unique persistent identifier that does not require a centralized registration authority and is often generated and/or registered cryptographically and is defined by [[spec:DID-CORE]].           |
 | DID Method                     | A definition of how a specific DID scheme implementeds the precise operations by which DIDs are created, resolved and deactivated and DID documents are written and updated. [[spec:DID-SPEC-REGISTRIES]]    |
+| DID Controller                 | Entity that is authorized to make changes to the contents of a DID Document. [[spec:DID-CORE]].                                                                                                              |
 | DID Document                   | A set of data describing the DID subject, service and verification methods, that the DID subject or a DID delegate can use to authenticate itself and prove its association with the DID. [[spec:DID-CORE]]. |
 | Verifiable Credential          | A cryptographically secure mechanism for expressing credentials like driver's licenses on the web. It is defined by [[spec:VC-DATA-MODEL]].                                                                  |
 | Verifiable Presentation        | A way to combine and present credentials. It is defined by [[spec:VC-DATA-MODEL]].                                                                                                                           |
@@ -131,6 +132,23 @@ resources that may exist.
 - The object MUST contain a `type` property, and its value MUST be the string "LinkedVerifiablePresentations".
 - The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an array which MUST
   contain one or more Uniform Resource Identifiers as described in [[spec:RFC3986]].
+
+## Security Considerations
+
+- Verifiable Presentations contain a challenge that is used by the verifier to request authorization / authentication
+  from the holder when credentials are packaged presented. Since a public verifiable presentation is not generated upon
+  the request of a verifier but ahead of time, the challenge can't be used as a security feature to guarantee that not
+  an old copy of the presentation is shared.
+- When a DID controller links a credential in the DID Document that is stored on a medium that allows contents to be
+  mutated, like a HTTP server, it becomes difficult to ensure that the served VP is the one that the controller intended
+  to be available. There are multiple ways this issue can be mitigated:
+  - Hashlink could be generated
+  - The challenge of the VP could be used: e.g. put the challenge in the DID Document alongside the reference to the VP.
+    This way no additional burden is placed on the client library to verify the authenticity of the VP since challenge
+    verification is supported by VP/VC libraries
+  - ?? How about the domain property of a VP? Does it make sense to use it somehow?
+  - Use of an expiration date, e.g. to mitigate clients that don't properly verify the challenge
+- Privacy: VP and all included credentials are public. Therefore, PII data SHOULD not be included
 
 ## Conformance
 
