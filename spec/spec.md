@@ -46,6 +46,9 @@ access these VCs because the application would need to implement a data exchange
   verifying the authenticity of a website.
 - Making the mandatory imprint page on a website machine readable by self-issuing an imprint credential and connecting
   it to the DID of the website to reduce the burden of vistors to extract relevant data from the imprint page.
+- for whom is this useful
+  - public entities
+  - long-lived identifiers
 
 ## Abstract
 
@@ -133,22 +136,135 @@ resources that may exist.
 - The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an array which MUST
   contain one or more Uniform Resource Identifiers as described in [[spec:RFC3986]].
 
+## Privacy Considerations
+
+_This section is non-normative_
+
+Since this specification is designed to publicly disclose verifiable information about a DID and its DID
+controller(s)/holder, privacy implications of the disclosure are important to consider. The publication of verifiable
+information about a DID is an voluntary action by a DID controller(s)/holder.
+
+- Outside of this spec is the publication of VCs by a third-party (issuer or verifier) that is not registered in the DID
+  document
+
+### Spectrum of Privacy
+
+_This section is non-normative_
+
+- VC meant to support the whole spectrum of privacy
+- Publicing VCs via this spec also involves the whole spectrum of privacy
+- The data of DIDs and VCs is highly structured, it is expected that it will be indexed
+- Public data about an identifier can lead to deanonymization and a loss of privacy
+  - Additional privacy considerations of DIDs and VCs apply
+- Disclosing VCs is a voluntary action that the holder performs
+
+https://w3c.github.io/vc-data-model/#usage-patterns
+
+### Impact of the Publication
+
+_This section is non-normative_
+
+- Issuer might not want the credential to be published
+- Holder holder controls the disclosure
+
+### Keep (Personal) Data Private
+
+_This section is non-normative_
+
+- Personal data is advised to not be shared via a public credential as it will be indexed and is publicly accessible
+- Use of selective disclosure to publish credentials while keeping certain information private
+  - Issuers of VCs are advised to allow for selective disclosure
+  - sd-jwt - TOOD: look at the spec to understand what the implementations are for this spec and talk to others
+
+- DID Subject Classfication
+- Other warnings in the DID Core spec
+
 ## Security Considerations
 
-- Verifiable Presentations contain a challenge that is used by the verifier to request authorization / authentication
-  from the holder when credentials are packaged presented. Since a public verifiable presentation is not generated upon
-  the request of a verifier but ahead of time, the challenge can't be used as a security feature to guarantee that not
-  an old copy of the presentation is shared.
-- When a DID controller links a credential in the DID Document that is stored on a medium that allows contents to be
-  mutated, like a HTTP server, it becomes difficult to ensure that the served VP is the one that the controller intended
-  to be available. There are multiple ways this issue can be mitigated:
-  - Hashlink could be generated
-  - The challenge of the VP could be used: e.g. put the challenge in the DID Document alongside the reference to the VP.
-    This way no additional burden is placed on the client library to verify the authenticity of the VP since challenge
-    verification is supported by VP/VC libraries
-  - ?? How about the domain property of a VP? Does it make sense to use it somehow?
-  - Use of an expiration date, e.g. to mitigate clients that don't properly verify the challenge
-- Privacy: VP and all included credentials are public. Therefore, PII data SHOULD not be included
+_This section is non-normative_
+
+### Issuers of VCs / Acceptable Ues
+
+_This section is non-normative_
+
+- Unauthorized use
+  - Is the credential meant to be published?
+  - Terms of use
+- Expiration date
+- Revocation lists
+
+### Holder Publishing selection of VCs
+
+_This section is non-normative_
+
+- Signature
+- Unsigned
+  - Content Integrity Protection
+  - requires additional security guarantees in the storage medium or the referencing mechanism
+- Challenge to prove currentness
+- Never reuse a challenge
+- Domain name? - something public? that communicates that this VP is meant for a public audience
+- Public outdated information
+  - Holder is advised to keep the published information up to date
+
+- See also Replay Attack
+
+### Verifier Validation
+
+_This section is non-normative_
+
+- Bearer credentials
+- Signatures
+- Expiration date
+- Revocation lists
+- Challenge in the DID Doc matches challenge in Presentation
+- Domain in the DID Doc matches domain in Presentation
+
+- Public credentials are not meant to grant access or trigger actions, they are meant for information disclosure
+  - Verifiers should require dynamic proof of ownership when credentials are requested for triggering actions or
+    granting access.
+
+### Attack Vectors
+
+_This section is non-normative_
+
+Through the publishing of Verifiable Credentials in a Verifiable Presentation the holder increases its the attack
+surface.
+
+#### Man in the Middle attack
+
+_This section is non-normative_
+
+https://w3c.github.io/vc-data-model/#man-in-the-middle-mitm-attack
+
+- Holders are advised to specify the intended the audience via a unique domain property, e.g. example.com
+- Holders are advised to use a challenge
+- Verifiers are advised to verify the challenge in the presentation against the challenge in the DID Document
+- Verifiers are advised to verify the domain in the presentation against the domain in the DID Document
+
+#### Replay Attack
+
+_This section is non-normative_
+
+- Nonce https://w3c.github.io/vc-data-model/#replay-attack
+- Holders are advised to set expiration date Information for the Vp
+- Holders are advised to use a challenge in the VP
+- Holders are advised to never reuse the challenge for the Vp
+- Holders are advised to set the domain property for the Vp
+- Verifiers are advised to not use public VPs for triggering actions or granting access - the use of a challenge,
+  domain, and other properties of the VP together with strong authentication mechasims are important to enable proof of
+  control
+
+#### Spoofing
+
+_This section is non-normative_
+
+- Verifiers are to require strong authentication mechansims to enable proof of control
+- Holders are advised to sign published VPs
+- Holders are advised to use a challenge in the VP
+  - Proof of control by use of additional properties like challenge https://w3c.github.io/vc-data-model/#spoofing-attack
+- Verifiers are advised to verify the challenge in the presentation against the challenge in the DID Document
+- Verifiers are advised to verify the domain in the presentation against the domain in the DID Document
 
 ## Conformance
 
