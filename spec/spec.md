@@ -140,58 +140,47 @@ resources that may exist.
 
 _This section is non-normative_
 
-Since this specification is designed to publicly disclose verifiable information about a DID and its DID
-controller(s)/holder, privacy implications of the disclosure are important to consider. The publication of verifiable
-information about a DID is an voluntary action by a DID controller(s)/holder.
+Since this specification is designed to publicly disclose verifiable data about a DID and its DID controller(s)/holder,
+privacy implications of the disclosure are important to consider. The publication of verifiable data about a DID is a
+voluntary decision by the DID controller(s)/holder and requires an update of the DID document that is under the control
+of the DID controller. Therefore, the publication of verifiable data is a user-centric decision and upholds the
+principles of Privacy by Design [PRIVACY-BY-DESIGN](#ref:PRIVACY-BY-DESIGN).
 
-- Outside of this spec is the publication of VCs by a third-party (issuer or verifier) that is not registered in the DID
-  document
+Outside of this specification and these privacy considerations is the publication of verifiable data about the holder's
+DID by a third-party, for example by an issuer or verifier.
 
 ### Spectrum of Privacy
 
 _This section is non-normative_
 
-- VC meant to support the whole spectrum of privacy
-- Publicing VCs via this spec also involves the whole spectrum of privacy
-- The data of DIDs and VCs is highly structured, it is expected that it will be indexed
-- Public data about an identifier can lead to deanonymization and a loss of privacy
-  - Additional privacy considerations of DIDs and VCs apply
-- Disclosing VCs is a voluntary action that the holder performs
+Verifiable Credentials [[spec:VC-DATA-MODEL]] support the full privacy spectrum ranging from pseudonymous to strongly
+identified. The Linked Verifiable Presentations specification strives to support the full privacy spectrum and does not
+take philosophical positions on the correct level of anonymity for any specific link. The following sections provide
+guidance for implementers who want to avoid specific scenarios that are hostile to privacy.
 
-https://w3c.github.io/vc-data-model/#usage-patterns
-
-### Impact of the Publication
+### Personally Identifiable Information
 
 _This section is non-normative_
 
-- Issuer might not want the credential to be published
-- Holder holder controls the disclosure
-
-### Keep (Personal) Data Private
-
-_This section is non-normative_
-
-- Personal data is advised to not be shared via a public credential as it will be indexed and is publicly accessible
-- Use of selective disclosure to publish credentials while keeping certain information private
-  - Issuers of VCs are advised to allow for selective disclosure
-  - sd-jwt - TOOD: look at the spec to understand what the implementations are for this spec and talk to others
-
-- DID Subject Classfication
-- Other warnings in the DID Core spec
+DID documents and verifiable credentials are highly structured, it is expected that any linked verifiable credential
+will be indexed. Therefore, holders are strongly advised not to link verifiable credentials that contain personally
+identifying data or data that can be used to correlate and track them. In addition, a verifiable credential contains the
+identifier of the issuer that could also be de-anonymized and tracked by the linked credential.
 
 ## Security Considerations
 
 _This section is non-normative_
 
-### Issuers of VCs / Acceptable Ues
+### Acceptable Use
 
 _This section is non-normative_
 
-- Unauthorized use
-  - Is the credential meant to be published?
-  - Terms of use
-- Expiration date
-- Revocation lists
+The holder has the power to publicly link a verifiable credential. When doing this the holder is advised to consider the
+constraints that are imposed by the issuer.
+
+Issuers are advised to utilize the mechanisms provided by the verifiable credentials data model [[spec:VC-DATA-MODEL]]
+to express constraints for issued credenditals. For example, expiration date, or terms of use can be specified in the
+credential to control the public linking of cerdentials.
 
 ### Holder Publishing selection of VCs
 
@@ -204,8 +193,8 @@ _This section is non-normative_
 - Challenge to prove currentness
 - Never reuse a challenge
 - Domain name? - something public? that communicates that this VP is meant for a public audience
-- Public outdated information
-  - Holder is advised to keep the published information up to date
+- Public outdated data
+  - Holder is advised to keep the published data up to date
 
 - See also Replay Attack
 
@@ -220,7 +209,7 @@ _This section is non-normative_
 - Challenge in the DID Doc matches challenge in Presentation
 - Domain in the DID Doc matches domain in Presentation
 
-- Public credentials are not meant to grant access or trigger actions, they are meant for information disclosure
+- Public credentials are not meant to grant access or trigger actions, they are meant for data disclosure
   - Verifiers should require dynamic proof of ownership when credentials are requested for triggering actions or
     granting access.
 
@@ -308,6 +297,11 @@ Implementations MUST comply with relevant normative statements in DID Configurat
   <dd>
     <cite><a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html">OpenID for Verifiable Credential Issuance</a></cite>.
     T. Lodderstedt; K. Yasuda; T. Looker; 2023-02-03. <span class="reference-status">Status: WD.</span>
+  </dd>
+  <dt id="ref:PRIVACY-BY-DESIGN">PRIVACY-BY-DESIGN</dt>
+  <dd>
+    <cite><a href="https://iapp.org/media/pdf/resource_center/pbd_implement_7found_principles.pdf">Privacy by Design</a></cite>.
+      Ann Cavoukian. Information and Privacy Commissioner. 2011.
   </dd>
 </dl>
 
