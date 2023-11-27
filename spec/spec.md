@@ -167,6 +167,15 @@ will be indexed. Therefore, holders are strongly advised not to link verifiable 
 identifying data or data that can be used to correlate and track them. In addition, a verifiable credential contains the
 identifier of the issuer that could also be de-anonymized and tracked by the linked credential.
 
+### Selective Disclosure
+
+_This section is non-normative_
+
+TODO
+
+- Holders might not want to reveal all the information in a credential
+- Issuers are advised to support selective disclosure if the credentials are meant to be published
+
 ## Security Considerations
 
 _This section is non-normative_
@@ -182,78 +191,28 @@ Issuers are advised to utilize the mechanisms provided by the verifiable credent
 to express constraints for issued credenditals. For example, expiration date, or terms of use can be specified in the
 credential to control the public linking of cerdentials.
 
-### Holder Publishing selection of VCs
+### Verification of Linked Presentations
 
 _This section is non-normative_
 
-- Signature
-- Unsigned
-  - Content Integrity Protection
-  - requires additional security guarantees in the storage medium or the referencing mechanism
-- Challenge to prove currentness
-- Never reuse a challenge
-- Domain name? - something public? that communicates that this VP is meant for a public audience
-- Public outdated data
-  - Holder is advised to keep the published data up to date
+When contemplating the public linking of credentials the holder enables anyone to discover and access them. Unlike the
+transmission of credential upon the request of a verifier, it is up to the holder to ensure that the integrity,
+authenticity and currentness of the linked credentials are protected so that an unknown future verifier will be able to
+securely verify the credentials.
 
-- See also Replay Attack
+Verifiers will discover references to linked credentials via the DID and the public DID Document of the holder. The
+references will require different protocols and services from which the linked credentials will be retrieved. Service
+operators and layers of caches will be able to change or replace the linked credentials. A verifier might need to ensure
+that the used protocol and the received credentials provide the desired security guarantees. In addition to the security
+mechanisms of Verifiable Credentials and Verifiable Presentations [[spec:VC-DATA-MODEL]] the `challenge` and `domain`
+search parameters in the URI of the linked credentials can help reduce the risk.
 
-### Verifier Validation
+TODO: add reference to the search parameters security mechansim
 
-_This section is non-normative_
-
-- Bearer credentials
-- Signatures
-- Expiration date
-- Revocation lists
-- Challenge in the DID Doc matches challenge in Presentation
-- Domain in the DID Doc matches domain in Presentation
-
-- Public credentials are not meant to grant access or trigger actions, they are meant for data disclosure
-  - Verifiers should require dynamic proof of ownership when credentials are requested for triggering actions or
-    granting access.
-
-### Attack Vectors
-
-_This section is non-normative_
-
-Through the publishing of Verifiable Credentials in a Verifiable Presentation the holder increases its the attack
-surface.
-
-#### Man in the Middle attack
-
-_This section is non-normative_
-
-https://w3c.github.io/vc-data-model/#man-in-the-middle-mitm-attack
-
-- Holders are advised to specify the intended the audience via a unique domain property, e.g. example.com
-- Holders are advised to use a challenge
-- Verifiers are advised to verify the challenge in the presentation against the challenge in the DID Document
-- Verifiers are advised to verify the domain in the presentation against the domain in the DID Document
-
-#### Replay Attack
-
-_This section is non-normative_
-
-- Nonce https://w3c.github.io/vc-data-model/#replay-attack
-- Holders are advised to set expiration date Information for the Vp
-- Holders are advised to use a challenge in the VP
-- Holders are advised to never reuse the challenge for the Vp
-- Holders are advised to set the domain property for the Vp
-- Verifiers are advised to not use public VPs for triggering actions or granting access - the use of a challenge,
-  domain, and other properties of the VP together with strong authentication mechasims are important to enable proof of
-  control
-
-#### Spoofing
-
-_This section is non-normative_
-
-- Verifiers are to require strong authentication mechansims to enable proof of control
-- Holders are advised to sign published VPs
-- Holders are advised to use a challenge in the VP
-  - Proof of control by use of additional properties like challenge https://w3c.github.io/vc-data-model/#spoofing-attack
-- Verifiers are advised to verify the challenge in the presentation against the challenge in the DID Document
-- Verifiers are advised to verify the domain in the presentation against the domain in the DID Document
+Independent of the successful verification of the linked presentation, verifiers should note that a linked verifiable
+presentation only proves control over the DID for creating the link to the presentation. When trying to grant access to
+a service or to perform an action the verifier should create a separate request that proves control over the holder's
+DID to mitigate Man-in-the-Middle attacks.
 
 ## Conformance
 
