@@ -55,7 +55,8 @@ is specified by protocols like [DIDComm](#ref:DIDCOMM-MESSAGING) and
 defining how to share, discover and retrieve Verifiable Credentials publicly via a service entry in a "DID Document".
 
 The Verifiable Credentials specification supports multiple different identifiers. This specification does NOT specify
-how to publish Verifiable Credentials for other valid identifiers apart from DIDs.
+how to publish Verifiable Credentials for other valid identifiers apart from DIDs. Furthermore, this specification does
+NOT specify how Verifiable Credentials are created, modified or deleted at a service endpoint.
 
 ## Status of This Document
 
