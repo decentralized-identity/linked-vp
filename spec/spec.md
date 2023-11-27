@@ -79,7 +79,8 @@ on GitHub (see above) and other mediums (e.g. DIF) where this work is being done
 | Decentralized Identifier (DID) | A globally unique persistent identifier that does not require a centralized registration authority and is often generated and/or registered cryptographically and is defined by [[spec:DID-CORE]].           |
 | DID Method                     | A definition of how a specific DID scheme implementeds the precise operations by which DIDs are created, resolved and deactivated and DID documents are written and updated. [[spec:DID-SPEC-REGISTRIES]]    |
 | DID Document                   | A set of data describing the DID subject, service and verification methods, that the DID subject or a DID delegate can use to authenticate itself and prove its association with the DID. [[spec:DID-CORE]]. |
-| Verifiable Credential          | A .... [[spec:VC-DATA-MODEL]]                                                                                                                                                                                |
+| Verifiable Credential          | A cryptographically secure mechanism for expressing credentials like driver's licenses on the web. It is defined by [[spec:VC-DATA-MODEL]].                                                                  |
+| Verifiable Presentation        | A way to combine and present credentials. It is defined by [[spec:VC-DATA-MODEL]].                                                                                                                           |
 
 ## Linked Verifiable Presentation Service Endpoint
 
