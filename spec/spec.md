@@ -126,10 +126,11 @@ resources that may exist.
 
 `LinkedVerifiablePresentations` endpoint descriptors are JSON objects composed as follows:
 
-- The object MUST contain an `id` property, and its value MUST be a valid DID URL reference.
+- The object MUST contain an `id` property, and its value MUST be a valid URI conforming to [[spec:RFC3986]] as
+  described in [[spec:DID-CORE]].
 - The object MUST contain a `type` property, and its value MUST be the string "LinkedVerifiablePresentations".
 - The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an array which MUST
-  contain one or more Uniform Resource Locators as described in [[spec:RFC3986]].
+  contain one or more Uniform Resource Identifiers as described in [[spec:RFC3986]].
 
 ## Conformance
 
