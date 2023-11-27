@@ -108,12 +108,10 @@ resources that may exist.
     {
       "id": "did:example:123#foo",
       "type": "LinkedVerifiablePresentations",
-      "serviceEndpoint": {
-        "presentations": [
-          "https://foo.example.com/verifiable-presentation.jsonld",
-          "https://identity.foundation/presentation.json"
-        ]
-      }
+      "serviceEndpoint": [
+        "https://foo.example.com/verifiable-presentation.jsonld",
+        "https://identity.foundation/presentation.json"
+      ]
     },
     {
       "id": "did:example:123#bar",
@@ -130,9 +128,8 @@ resources that may exist.
 
 - The object MUST contain an `id` property, and its value MUST be a valid DID URL reference.
 - The object MUST contain a `type` property, and its value MUST be the string "LinkedVerifiablePresentations".
-- The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an object that contains
-  `presentations` as property, the value of which MUST be an array of one or more Uniform Resource Locators as described
-  in [[spec:RFC3986]].
+- The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an array which MUST
+  contain one or more Uniform Resource Locators as described in [[spec:RFC3986]].
 
 ## Conformance
 
