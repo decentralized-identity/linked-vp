@@ -140,9 +140,55 @@ on GitHub (see above) and other mediums (e.g. DIF) where this work is being done
 </tbody>
 </table>
 <h2 id="linked-verifiable-presentation-service-endpoint"><a class="toc-anchor" href="#linked-verifiable-presentation-service-endpoint" >§</a> Linked Verifiable Presentation Service Endpoint</h2>
-<p>TODO</p>
+<p>To enable discovery of linked verifiable presentations from the resolution of a DID, there must exist a DID Document
+mechanism for expressing locations where Verifiable Presentations MAY be located. To that end, the following section
+codifies the <code>LinkedVerifiablePresentations</code> Service Endpoint, which allows a DID controller to specify a list of
+presentations over which they assert control. Presentations asserted within the <code>LinkedVerifiablePresentations</code> endpoint
+descriptor can then be subsequently crawled by verifying parties to locate and verify any Verifiable Presentation
+resources that may exist.</p>
+<h3 id="example"><a class="toc-anchor" href="#example" >§</a> Example</h3>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"https://www.w3.org/ns/did/v1"</span><span class="token punctuation">,</span>
+    <span class="token string">"https://identity.foundation/linked-vp/v1"</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+  <span class="token property">"verificationMethod"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"</span><span class="token punctuation">,</span>
+    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"JsonWebKey2020"</span><span class="token punctuation">,</span>
+    <span class="token property">"controller"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+    <span class="token property">"publicKeyJwk"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"kty"</span><span class="token operator">:</span> <span class="token string">"OKP"</span><span class="token punctuation">,</span>
+      <span class="token property">"crv"</span><span class="token operator">:</span> <span class="token string">"Ed25519"</span><span class="token punctuation">,</span>
+      <span class="token property">"x"</span><span class="token operator">:</span> <span class="token string">"VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"service"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#foo"</span><span class="token punctuation">,</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"LinkedVerifiablePresentations"</span><span class="token punctuation">,</span>
+      <span class="token property">"serviceEndpoint"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"https://foo.example.com/verifiable-presentation.jsonld"</span><span class="token punctuation">,</span>
+        <span class="token string">"https://identity.foundation/presentation.json"</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#bar"</span><span class="token punctuation">,</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"LinkedVerifiablePresentations"</span><span class="token punctuation">,</span>
+      <span class="token property">"serviceEndpoint"</span><span class="token operator">:</span> <span class="token string">"https://bar.example.com/verifiable-presentation.jwt"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <h3 id="linked-verifiable-presentations-2"><a class="toc-anchor" href="#linked-verifiable-presentations-2" >§</a> Linked Verifiable Presentations</h3>
-<p>TODO</p>
+<p><code>LinkedVerifiablePresentations</code> endpoint descriptors are JSON objects composed as follows:</p>
+<ul>
+<li>The object MUST contain an <code>id</code> property, and its value MUST be a valid URI conforming to [<a class="spec-reference" href="#ref:RFC3986">RFC3986</a>] as
+described in [<a class="spec-reference" href="#ref:DID-CORE">DID-CORE</a>].</li>
+<li>The object MUST contain a <code>type</code> property, and its value MUST be the string “LinkedVerifiablePresentations”.</li>
+<li>The object MUST contain a <code>serviceEndpoint</code> property, and its value MUST be either a string or an array which MUST
+contain one or more Uniform Resource Identifiers as described in [<a class="spec-reference" href="#ref:RFC3986">RFC3986</a>].</li>
+</ul>
 <h2 id="conformance"><a class="toc-anchor" href="#conformance" >§</a> Conformance</h2>
 <p>As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this
 specification are non-normative. Everything else in this specification is normative.</p>
@@ -173,6 +219,12 @@ MUST comply with relevant normative statements in that section.</p>
         <dd>
           <cite><a href="https://www.w3.org/TR/did-spec-registries/">DID Specification Registries</a></cite>. 
           Orie Steele; Manu Sporny; 2020-06-18. <span class="reference-status">Status: NOTE</span>.
+        </dd>
+      
+        <dt id="ref:RFC3986">RFC3986</dt>
+        <dd>
+          <cite><a href="https://tools.ietf.org/html/rfc3986">Uniform Resource Identifier (URI): Generic Syntax</a></cite>. 
+          T. Berners-Lee; R. Fielding; L. Masinter; 2005-01. <span class="reference-status">Status: Internet Standard</span>.
         </dd>
       
         <dt id="ref:VC-DATA-MODEL">VC-DATA-MODEL</dt>
@@ -287,6 +339,7 @@ the <code>/.well-known/did-configuration.json</code> path.</li>
 <li><a href="#terminology" >Terminology</a></li>
 <li><a href="#linked-verifiable-presentation-service-endpoint" >Linked Verifiable Presentation Service Endpoint</a>
 <ul>
+<li><a href="#example" >Example</a></li>
 <li><a href="#linked-verifiable-presentations-2" >Linked Verifiable Presentations</a></li>
 </ul>
 </li>
