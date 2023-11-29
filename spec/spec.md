@@ -89,6 +89,10 @@ presentations over which they assert control. Presentations asserted within the 
 descriptor can then be subsequently crawled by verifying parties to locate and verify any Verifiable Presentation
 resources that may exist.
 
+The DID Controller might include the OPTIONAL parameters `challenge` and `domain` in the URL of the service endpoint to
+mitigate replay attacks. If present, a verifier SHOULD (TODO: MUST?) include the parameters in the verification of the
+retrieved presentation as specified in [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY).
+
 ### Example
 
 ```json
@@ -120,7 +124,7 @@ resources that may exist.
     {
       "id": "did:example:123#bar",
       "type": "LinkedVerifiablePresentations",
-      "serviceEndpoint": "https://bar.example.com/verifiable-presentation.jwt"
+      "serviceEndpoint": "https://bar.example.com/verifiable-presentation.jwt?challenge=ABCDEF&domain=bar.example.com"
     }
   ]
 }
@@ -191,6 +195,15 @@ Issuers are advised to utilize the mechanisms provided by the verifiable credent
 to express constraints for issued credenditals. For example, expiration date, or terms of use can be specified in the
 credential to control the public linking of cerdentials.
 
+### Limiting Validity of Verifiable Presentations
+
+_This section is non-normative_
+
+Linked Verifeable Presentations are accessible and verifiable by anyone and they might be accessible at the given URI
+indefinitely. The holder might therefore desire to limit the validity of a presentation. This can be achieved with a
+timestamp in the `expires` property that is an optional element of `proof` property as specified in
+[[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY).
+
 ### Verification of Linked Presentations
 
 _This section is non-normative_
@@ -204,8 +217,8 @@ Verifiers will discover references to linked credentials via the DID and the pub
 references will require different protocols and services from which the linked credentials will be retrieved. Service
 operators and layers of caches will be able to change or replace the linked credentials. A verifier might need to ensure
 that the used protocol and the received credentials provide the desired security guarantees. In addition to the security
-mechanisms of Verifiable Credentials and Verifiable Presentations [[spec:VC-DATA-MODEL]] the `challenge` and `domain`
-search parameters in the URI of the linked credentials can help reduce the risk.
+mechanisms of Verifiable Credentials and Verifiable Presentations [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY),
+`challenge` and `domain` search parameters in the URI of the linked credentials can help reduce the risk.
 
 TODO: add reference to the search parameters security mechansim
 
@@ -261,6 +274,11 @@ Implementations MUST comply with relevant normative statements in DID Configurat
   <dd>
     <cite><a href="https://iapp.org/media/pdf/resource_center/pbd_implement_7found_principles.pdf">Privacy by Design</a></cite>.
       Ann Cavoukian. Information and Privacy Commissioner. 2011.
+  </dd>
+  <dt id="ref:VC-DATA-INTEGRITY">VC-DATA-INTEGRITY</dt>
+  <dd>
+    <cite><a href="https://www.w3.org/TR/vc-data-integrity/">Verifiable Credential Data Integrity</a></cite>.
+      Manu Sporny; Dave Longley; Greg Bernstein; Dmitri Zagidulin; Sebastian Crane; 2023-11-21. <span class="reference-status">Status: Candidate Recommendation.</span>
   </dd>
 </dl>
 
