@@ -82,18 +82,29 @@ on GitHub (see above) and other mediums (e.g. DIF) where this work is being done
 
 ## Linked Verifiable Presentation Service Endpoint
 
-To enable discovery of linked verifiable presentations from the resolution of a DID, there must exist a DID Document
-mechanism for expressing locations where Verifiable Presentations MAY be located. To that end, the following section
-codifies the `LinkedVerifiablePresentations` Service Endpoint, which allows a DID controller to specify a list of
-presentations over which they assert control. Presentations asserted within the `LinkedVerifiablePresentations` endpoint
-descriptor can then be subsequently crawled by verifying parties to locate and verify any Verifiable Presentation
-resources that may exist.
+To enable the discovery of publicly accessible verifiable presentations and verifiable credentials for a DID, there must
+exist a DID Document mechanism for expressing locations where verifiable presentations MAY be located. To that end, the
+following section codifies the `LinkedVerifiablePresentations` service endpoint. The endpoint allows a DID controller to
+link verifiable presentations over which they assert control. Presentations asserted within the
+`LinkedVerifiablePresentations` endpoint descriptor can then be subsequently crawled by verifying parties to locate and
+verify any Verifiable Presentation resources that may exist.
 
-The DID Controller might include the OPTIONAL parameters `challenge` and `domain` in the URL of the service endpoint to
-mitigate replay attacks. If present, a verifier SHOULD (TODO: MUST?) include the parameters in the verification of the
-retrieved presentation as specified in [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY).
+The DID Controller MAY include the parameters `challenge` and `domain` in the URL of the service endpoint and the
+referenced Verifiable Presentation to mitigate replay attacks. If present, a verifier SHOULD include the parameters in
+the verification of the presentation as specified in [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) and
+[[VC-DATA-MODEL]].
 
-### Example
+### Linked Verifiable Presentations
+
+`LinkedVerifiablePresentations` endpoint descriptors are JSON objects composed as follows:
+
+- The object MUST contain an `id` property, and its value MUST be a valid URI conforming to [[spec:RFC3986]] as
+  described in [[spec:DID-CORE]].
+- The object MUST contain a `type` property, and its value MUST be the string "LinkedVerifiablePresentations".
+- The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an array which MUST
+  contain one or more Uniform Resource Locators as described in [[spec:RFC3986]].
+
+### Example DID Document with LinkedVerifiablePresentations service endpoints
 
 ```json
 {
@@ -117,28 +128,50 @@ retrieved presentation as specified in [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGR
       "id": "did:example:123#foo",
       "type": "LinkedVerifiablePresentations",
       "serviceEndpoint": [
-        "https://foo.example.com/verifiable-presentation.jsonld",
-        "https://identity.foundation/presentation.json"
+        "https://foo.example.com/verifiable-presentation.jsonld?challenge=hGa8Vx5JPt&domain=bar.example.com",
+        "https://bar.example.com/verifiable-presentation.json"
       ]
     },
     {
-      "id": "did:example:123#bar",
+      "id": "did:example:123#baz",
       "type": "LinkedVerifiablePresentations",
-      "serviceEndpoint": "https://bar.example.com/verifiable-presentation.jwt?challenge=ABCDEF&domain=bar.example.com"
+      "serviceEndpoint": "ipfs://bafybeihkoviema7g3gxyt6la7vd5ho32ictqbilu3wnlo3rs7ewhnp7lly/verifiable-presentation.jwt"
     }
   ]
 }
 ```
 
-### Linked Verifiable Presentations
+### Example Linked Verifiable Presentation resource
 
-`LinkedVerifiablePresentations` endpoint descriptors are JSON objects composed as follows:
-
-- The object MUST contain an `id` property, and its value MUST be a valid URI conforming to [[spec:RFC3986]] as
-  described in [[spec:DID-CORE]].
-- The object MUST contain a `type` property, and its value MUST be the string "LinkedVerifiablePresentations".
-- The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an array which MUST
-  contain one or more Uniform Resource Identifiers as described in [[spec:RFC3986]].
+```json
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1"
+  ],
+  "type": ["VerifiablePresentation"],
+  "holder": "did:example:123",
+  "verifiableCredential": [{
+    "@context": "https://www.w3.org/2018/credentials/v1",
+    "type": ["VerifiableCredential", "ExampleBusinessRegistrationCredential"],
+    "issuer": "did:example:abcde",
+    "credentialSubject": {
+      "id": "did:example:123",
+      "legalName": "Example LLC",
+      "address": "24 Example Street, 12345 Example City, Example Country"
+    },
+    "proof": {}
+  }],
+  "proof": [{
+    "type": "Ed25519Signature2020",
+    "created": "2023-12-01T08:19:39Z",
+    "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+    "challenge": "hGa8Vx5JPt",
+    "domain": "bar.example.com",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z58DAdFfa9SkqZMVPxAQpic7ndSayn1PzZs6ZjWp1CktyGesjuTSwRdoWhAfGFCF5bppETSTojQCrfFPP2oumHKtz"
+  }]
+}
+```
 
 ## Privacy Considerations
 
@@ -175,10 +208,9 @@ identifier of the issuer that could also be de-anonymized and tracked by the lin
 
 _This section is non-normative_
 
-TODO
-
-- Holders might not want to reveal all the information in a credential
-- Issuers are advised to support selective disclosure if the credentials are meant to be published
+A holder might want to withhold information that is part of Verifiable Credentials that they want to link publicly.
+Issuers are advised to support selective disclosure in issued credentials to grant holders the ability to make
+fine-grained decisions about what information shall become publicly available.
 
 ## Security Considerations
 
