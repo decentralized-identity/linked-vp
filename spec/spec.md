@@ -36,9 +36,9 @@ Credentials discoverable that belong to a DID or to a DNS name.
 
 Currently, the only way an application or web service can access VCs of a DID is to use a data exchange protocol like
 [OpenID4VC](https://openid.net/openid4vc/) or [DIDComm](https://didcomm.org/) to request and receive the desired
-credential. While this data exchange is important for VCs that shall be kept private, Holders might desire to make other
-VCs public. For public VCs the required data exchange increases the complexity of applications that want to discover and
-access these VCs because the application would need to implement a data exchange protocol.
+credential. While this data exchange is important for VCs that shall be kept private, [Holders][holder] might desire to
+make other VCs public. For public VCs the required data exchange increases the complexity of applications that want to
+discover and access these VCs because the application would need to implement a data exchange protocol.
 
 ## Potential Use Cases
 
@@ -71,17 +71,18 @@ on GitHub (see above) and other mediums (e.g. DIF) where this work is being done
 
 ## Terminology
 
+_This section is non-normative_
+
+This section defines terms used in this specification.
+
 | Term                           | Definition                                                                                                                                                                                                   |
 | :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Decentralized Identifier (DID) | A globally unique persistent identifier that does not require a centralized registration authority and is often generated and/or registered cryptographically and is defined by [[spec:DID-CORE]].           |
 | DID Controller                 | Entity that is authorized to make changes to the contents of a DID Document. [[spec:DID-CORE]].                                                                                                              |
 | DID Document                   | A set of data describing the DID subject, service and verification methods, that the DID subject or a DID delegate can use to authenticate itself and prove its association with the DID. [[spec:DID-CORE]]. |
 | DID Method                     | A definition of how a specific DID scheme implementeds the precise operations by which DIDs are created, resolved and deactivated and DID documents are written and updated. [[spec:DID-SPEC-REGISTRIES]]    |
-| Holder                         | A role an entity might exercise by receiving or presenting verifiable credentials. [[spec:VC-DATA-MODEL]].                                                                                                   |
-| Issuer                         | A role an entity might exercise by asserting claims about subjects as verifiable credentials. [[spec:VC-DATA-MODEL]].                                                                                        |
 | Verifiable Credential          | A cryptographically secure mechanism for expressing credentials like driver's licenses on the web. It is defined by [[spec:VC-DATA-MODEL]].                                                                  |
 | Verifiable Presentation        | A way to combine and present credentials. It is defined by [[spec:VC-DATA-MODEL]].                                                                                                                           |
-| Verifier                       | A role an entity might exercise by receiving and verifying verifiable credentials and presentations. [[spec:VC-DATA-MODEL]].                                                                                 |
 
 ## Linked Verifiable Presentation Service Endpoint
 
@@ -93,8 +94,8 @@ link verifiable presentations over which they assert control. Presentations asse
 verify any Verifiable Presentation resources that may exist.
 
 The DID Controller MAY include the parameters `challenge` and `domain` in the URL of the service endpoint and the
-referenced Verifiable Presentation to mitigate replay attacks. If present, a verifier SHOULD include the parameters in
-the verification of the presentation as specified in [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) and
+referenced Verifiable Presentation to mitigate replay attacks. If present, a [verifier][verifier] SHOULD include the
+parameters in the verification of the presentation as specified in [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) and
 [[VC-DATA-MODEL]].
 
 ### Linked Verifiable Presentations
@@ -180,14 +181,14 @@ the verification of the presentation as specified in [[VC-DATA-INTEGRITY]](#ref:
 
 _This section is non-normative_
 
-Since this specification is designed to publicly disclose verifiable data about a DID and its DID controller(s)/holder,
-privacy implications of the disclosure are important to consider. The publication of verifiable data about a DID is a
-voluntary decision by the DID controller(s)/holder and requires an update of the DID document that is under the control
-of the DID controller. Therefore, the publication of verifiable data is a user-centric decision and upholds the
-principles of Privacy by Design [PRIVACY-BY-DESIGN](#ref:PRIVACY-BY-DESIGN).
+Since this specification is designed to publicly disclose verifiable data about a DID and its DID
+controller(s)/[holder][holder], privacy implications of the disclosure are important to consider. The publication of
+verifiable data about a DID is a voluntary decision by the DID controller(s)/[holder][holder] and requires an update of
+the DID document that is under the control of the DID controller. Therefore, the publication of verifiable data is a
+user-centric decision and upholds the principles of Privacy by Design [PRIVACY-BY-DESIGN](#ref:PRIVACY-BY-DESIGN).
 
-Outside of this specification and these privacy considerations is the publication of verifiable data about the holder's
-DID by a third-party, for example by an issuer or verifier.
+Outside of this specification and these privacy considerations is the publication of verifiable data about the
+[holder's][holder] DID by a third-party, for example by an [issuer][issuer] or [verifier][verifier].
 
 ### Spectrum of Privacy
 
@@ -203,17 +204,17 @@ guidance for implementers who want to avoid specific scenarios that are hostile 
 _This section is non-normative_
 
 DID documents and verifiable credentials are highly structured, it is expected that any linked verifiable credential
-will be indexed. Therefore, holders are strongly advised not to link verifiable credentials that contain personally
-identifying data or data that can be used to correlate and track them. In addition, a verifiable credential contains the
-identifier of the issuer that could also be de-anonymized and tracked by the linked credential.
+will be indexed. Therefore, [holders][holder] are _RECOMMENDED_ not to link verifiable credentials that contain
+personally identifying data or data that can be used to correlate and track them. In addition, a verifiable credential
+contains the identifier of the [issuer][issuer] that could also be de-anonymized and tracked by the linked credential.
 
 ### Selective Disclosure
 
 _This section is non-normative_
 
-A holder might want to withhold information that is part of Verifiable Credentials that they want to link publicly.
-Issuers are advised to support selective disclosure in issued credentials to grant holders the ability to make
-fine-grained decisions about what information shall become publicly available.
+A [holder][holder] might want to withhold information that is part of Verifiable Credentials that they want to link
+publicly. [Issuers][issuer] are _RECOMMENDED_ to support selective disclosure in issued credentials to grant
+[holders][holder] the ability to make fine-grained decisions about what information shall become publicly available.
 
 ## Security Considerations
 
@@ -223,44 +224,45 @@ _This section is non-normative_
 
 _This section is non-normative_
 
-The holder has the power to publicly link a verifiable credential. When doing this the holder is advised to consider the
-constraints that are imposed by the issuer.
+The [holder][holder] has the power to publicly link a verifiable credential. When doing this the [holder][holder] is
+_RECOMMENDED_ to consider the constraints that are imposed by the [issuer][issuer].
 
-Issuers are advised to utilize the mechanisms provided by the verifiable credentials data model [[spec:VC-DATA-MODEL]]
-to express constraints for issued credenditals. For example, expiration date, or terms of use can be specified in the
-credential to control the public linking of cerdentials.
+[Issuers][issuer] are _RECOMMENDED_ to utilize the mechanisms provided by the verifiable credentials data model
+[[spec:VC-DATA-MODEL]] to express constraints for issued credenditals. For example, expiration date, or terms of use can
+be specified in the credential to control the public linking of cerdentials.
 
 ### Limiting Validity of Verifiable Presentations
 
 _This section is non-normative_
 
 Linked Verifeable Presentations are accessible and verifiable by anyone and they might be accessible at the given URI
-indefinitely. The holder might therefore desire to limit the validity of a presentation. This can be achieved with a
-timestamp in the `expires` property that is an optional element of `proof` property as specified in
+indefinitely. The [holder][holder] might therefore desire to limit the validity of a presentation. This can be achieved
+with a timestamp in the `expires` property that is an optional element of `proof` property as specified in
 [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY).
 
 ### Verification of Linked Presentations
 
 _This section is non-normative_
 
-When contemplating the public linking of credentials the holder enables anyone to discover and access them. Unlike the
-transmission of credential upon the request of a verifier, it is up to the holder to ensure that the integrity,
-authenticity and currentness of the linked credentials are protected so that an unknown future verifier will be able to
-securely verify the credentials.
+When contemplating the public linking of credentials the [holder][holder] enables anyone to discover and access them.
+Unlike the transmission of credential upon the request of a [verifier][verifier], it is up to the [holder][holder] to
+ensure that the integrity, authenticity and currentness of the linked credentials are protected so that an unknown
+future [verifier][verifier] will be able to securely verify the credentials.
 
-Verifiers will discover references to linked credentials via the DID and the public DID Document of the holder. The
-references will require different protocols and services from which the linked credentials will be retrieved. Service
-operators and layers of caches will be able to change or replace the linked credentials. A verifier might need to ensure
-that the used protocol and the received credentials provide the desired security guarantees. In addition to the security
-mechanisms of Verifiable Credentials and Verifiable Presentations [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY),
-`challenge` and `domain` search parameters in the URI of the linked credentials can help reduce the risk.
+[Verifiers][verifier] will discover references to linked credentials via the DID and the public DID Document of the
+[holder][holder]. The references will require different protocols and services from which the linked credentials will be
+retrieved. Service operators and layers of caches will be able to change or replace the linked credentials. A
+[verifier][verifier] might need to ensure that the used protocol and the received credentials provide the desired
+security guarantees. In addition to the security mechanisms of Verifiable Credentials and Verifiable Presentations
+[[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY), `challenge` and `domain` search parameters in the URI of the linked
+credentials can help reduce the risk.
 
 TODO: add reference to the search parameters security mechansim
 
-Independent of the successful verification of the linked presentation, verifiers should note that a linked verifiable
-presentation only proves control over the DID for creating the link to the presentation. When trying to grant access to
-a service or to perform an action the verifier should create a separate request that proves control over the holder's
-DID to mitigate Man-in-the-Middle attacks.
+Independent of the successful verification of the linked presentation, [verifiers][verifier] should note that a linked
+verifiable presentation only proves control over the DID for creating the link to the presentation. When trying to grant
+access to a service or to perform an action the [verifier][verifier] should create a separate request that proves
+control over the [holder's][holder] DID to mitigate Man-in-the-Middle attacks.
 
 ## Conformance
 
@@ -344,8 +346,8 @@ The following projects are working on Linked Verifiable Presentations and Creden
 - [DID Specification Registries - Service types](https://w3c.github.io/did-spec-registries/#service-types)
 - The [Service type - CredentialRegistry](https://w3c.github.io/did-spec-registries/#credentialregistry) specification
   provides a similar use case. They're focused on Verifiable Credentials that are issued by a third party. This
-  proposal's focus on Verifiable Presentations would allow the holder to have more control over the published credential
-  by signing the presentation and potentially limiting it to a certain domain name, etc.
+  proposal's focus on Verifiable Presentations would allow the [holder][holder] to have more control over the published
+  credential by signing the presentation and potentially limiting it to a certain domain name, etc.
 - X.509 certificates contain information about the issuing and holding party. With this proposal a DID + VC could
   provide the same functionality.
 - [identinet-plugin](https://github.com/identinet/identinet-plugin) is a browser add-on that demonstrates how Well Known
@@ -362,3 +364,7 @@ The following projects are working on Linked Verifiable Presentations and Creden
 - The [Well Known DID Configuration](https://identity.foundation/.well-known/resources/did-configuration/) specification
   defines how to create a bi-directional relationship between a DID, independent of the DID method, and a DNS name via
   the `/.well-known/did-configuration.json` path.
+
+[issuer]: https://www.w3.org/TR/vc-data-model-1.1/#dfn-issuers
+[holder]: https://www.w3.org/TR/vc-data-model-1.1/#dfn-holders
+[verifier]: https://www.w3.org/TR/vc-data-model-1.1/#dfn-verifier
