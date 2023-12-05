@@ -49,6 +49,7 @@ discover and access these VCs because the application would need to implement a 
 - for whom is this useful
   - public entities
   - long-lived identifiers
+- publicly proof ownership over a domain name - Well-known DID Configuration + published published credential
 
 ## Abstract
 
@@ -86,15 +87,15 @@ This section defines terms used in this specification.
 
 ## Linked Verifiable Presentation Service Endpoint
 
-To enable the discovery of publicly accessible verifiable presentations and verifiable credentials for a DID, there must
-exist a DID Document mechanism for expressing locations where verifiable presentations MAY be located. To that end, the
-following section codifies the `LinkedVerifiablePresentations` service endpoint. The endpoint allows a DID controller to
-link verifiable presentations over which they assert control. Presentations asserted within the
-`LinkedVerifiablePresentations` endpoint descriptor can then be subsequently crawled by verifying parties to locate and
-verify any Verifiable Presentation resources that may exist.
+To enable the public discovery of verifiable presentations and verifiable credentials for a DID, there must exist a DID
+Document mechanism for expressing locations where verifiable presentations MAY be located. To that end, the following
+section codifies the `LinkedVerifiablePresentations` service endpoint. The endpoint allows a DID controller to publish
+and link verifiable presentations with verifiable credentials that SHALL be publicly associated with the DID.
+Presentations referenced within the `LinkedVerifiablePresentations` endpoint descriptor can then be crawled by verifying
+parties to locate and verify any presentation resources that may exist.
 
-The DID Controller MAY include the parameters `challenge` and `domain` in the URL of the service endpoint and the
-referenced Verifiable Presentation to mitigate replay attacks. If present, a [verifier][verifier] SHOULD include the
+The DID Controller MAY include the parameters `challenge` and `domain` in the URL of the service endpoint and proof of
+the referenced Verifiable Presentation to mitigate replay attacks. If present, a [verifier][verifier] SHOULD include the
 parameters in the verification of the presentation as specified in [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) and
 [[VC-DATA-MODEL]].
 
@@ -155,15 +156,28 @@ parameters in the verification of the presentation as specified in [[VC-DATA-INT
   "type": ["VerifiablePresentation"],
   "holder": "did:example:123",
   "verifiableCredential": [{
-    "@context": "https://www.w3.org/2018/credentials/v1",
-    "type": ["VerifiableCredential", "ExampleBusinessRegistrationCredential"],
-    "issuer": "did:example:abcde",
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://identity.foundation/.well-known/did-configuration/v1"
+    ],
+    "issuer": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM",
+    "issuanceDate": "2020-12-04T14:08:28-06:00",
+    "expirationDate": "2025-12-04T14:08:28-06:00",
+    "type": [
+      "VerifiableCredential",
+      "DomainLinkageCredential"
+    ],
     "credentialSubject": {
-      "id": "did:example:123",
-      "legalName": "Example LLC",
-      "address": "24 Example Street, 12345 Example City, Example Country"
+      "id": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM",
+      "origin": "https://identity.foundation"
     },
-    "proof": {}
+    "proof": {
+      "type": "Ed25519Signature2018",
+      "created": "2020-12-04T20:08:28.540Z",
+      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..D0eDhglCMEjxDV9f_SNxsuU-r3ZB9GR4vaM9TYbyV7yzs1WfdUyYO8rFZdedHbwQafYy8YOpJ1iJlkSmB4JaDQ",
+      "proofPurpose": "assertionMethod",
+      "verificationMethod": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM#z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM"
+    }
   }],
   "proof": [{
     "type": "Ed25519Signature2020",
@@ -181,11 +195,11 @@ parameters in the verification of the presentation as specified in [[VC-DATA-INT
 
 _This section is non-normative_
 
-Since this specification is designed to publicly disclose verifiable data about a DID and its DID
-controller(s)/[holder][holder], privacy implications of the disclosure are important to consider. The publication of
-verifiable data about a DID is a voluntary decision by the DID controller(s)/[holder][holder] and requires an update of
-the DID document that is under the control of the DID controller. Therefore, the publication of verifiable data is a
-user-centric decision and upholds the principles of Privacy by Design [PRIVACY-BY-DESIGN](#ref:PRIVACY-BY-DESIGN).
+Since this specification is designed to make verifiable data about a DID publicly discoverable, privacy implications of
+are important to consider. The publication of verifiable data about a DID is a voluntary decision by the credential
+[holder][holder] and requires an update of the DID document that is under the control of the DID controller. Therefore,
+the publication of verifiable data is a user-centric decision and upholds the principles of Privacy by Design
+[PRIVACY-BY-DESIGN](#ref:PRIVACY-BY-DESIGN).
 
 Outside of this specification and these privacy considerations is the publication of verifiable data about the
 [holder's][holder] DID by a third-party, for example by an [issuer][issuer] or [verifier][verifier].
@@ -203,18 +217,19 @@ guidance for implementers who want to avoid specific scenarios that are hostile 
 
 _This section is non-normative_
 
-DID documents and verifiable credentials are highly structured, it is expected that any linked verifiable credential
-will be indexed. Therefore, [holders][holder] are _RECOMMENDED_ not to link verifiable credentials that contain
-personally identifying data or data that can be used to correlate and track them. In addition, a verifiable credential
-contains the identifier of the [issuer][issuer] that could also be de-anonymized and tracked by the linked credential.
+DID documents and the verifiable credentials data model are highly structured. It is expected that any linked verifiable
+presentation and credential will be indexed. In addition, any verifiable credential must contain the identifier of the
+[issuer][issuer] that could also be de-anonymized and tracked by the publication of the credential. Therefore,
+[holders][holder] are _RECOMMENDED_ not to publish verifiable credentials that contain personally identifying data or
+data that can be used to correlate and track them or the [issuer][issuer].
 
 ### Selective Disclosure
 
 _This section is non-normative_
 
-A [holder][holder] might want to withhold information that is part of Verifiable Credentials that they want to link
-publicly. [Issuers][issuer] are _RECOMMENDED_ to support selective disclosure in issued credentials to grant
-[holders][holder] the ability to make fine-grained decisions about what information shall become publicly available.
+A [holder][holder] might want to withhold information that is part of a Verifiable Credential they want to publish.
+[Issuers][issuer] are _RECOMMENDED_ to support selective disclosure in issued credentials to grant [holders][holder] the
+ability to make fine-grained decisions about the information will be publicly available.
 
 ## Security Considerations
 
@@ -224,20 +239,21 @@ _This section is non-normative_
 
 _This section is non-normative_
 
-The [holder][holder] has the power to publicly link a verifiable credential. When doing this the [holder][holder] is
-_RECOMMENDED_ to consider the constraints that are imposed by the [issuer][issuer].
+A [holder][holder] has the power to publish any verifiable credential they are holding. Before including a credential in
+a linked verifiable presetation the [holder][holder] is _RECOMMENDED_ to consider the constraints that are imposed by
+the [issuer][issuer].
 
 [Issuers][issuer] are _RECOMMENDED_ to utilize the mechanisms provided by the verifiable credentials data model
-[[spec:VC-DATA-MODEL]] to express constraints for issued credenditals. For example, expiration date, or terms of use can
-be specified in the credential to control the public linking of cerdentials.
+[[spec:VC-DATA-MODEL]] to express constraints for issued credenditals. For example, the properties `expirationDate` and
+`termsOfUse` can be used to control or limit the public linking of credentials.
 
 ### Limiting Validity of Verifiable Presentations
 
 _This section is non-normative_
 
 Linked Verifeable Presentations are accessible and verifiable by anyone and they might be accessible at the given URI
-indefinitely. The [holder][holder] might therefore desire to limit the validity of a presentation. This can be achieved
-with a timestamp in the `expires` property that is an optional element of `proof` property as specified in
+indefinitely. A [holder][holder] might therefore desire to limit the validity of a presentation. This can be achieved by
+utilizing the `expires` property that is an optional element of `proof` property as specified in
 [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY).
 
 ### Verification of Linked Presentations
@@ -245,9 +261,9 @@ with a timestamp in the `expires` property that is an optional element of `proof
 _This section is non-normative_
 
 When contemplating the public linking of credentials the [holder][holder] enables anyone to discover and access them.
-Unlike the transmission of credential upon the request of a [verifier][verifier], it is up to the [holder][holder] to
-ensure that the integrity, authenticity and currentness of the linked credentials are protected so that an unknown
-future [verifier][verifier] will be able to securely verify the credentials.
+Unlike the transmission of credentials upon the request of a [verifier][verifier], it is up to the [holder][holder] to
+ensure that the integrity, authenticity and currentness of the linked presentation and credentials are protected so that
+an unknown future [verifier][verifier] will be able to securely verify the credentials.
 
 [Verifiers][verifier] will discover references to linked credentials via the DID and the public DID Document of the
 [holder][holder]. The references will require different protocols and services from which the linked credentials will be
