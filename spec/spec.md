@@ -251,7 +251,7 @@ the [issuer][issuer].
 
 _This section is non-normative_
 
-Linked Verifeable Presentations are accessible and verifiable by anyone and they might be accessible at the given URI
+Linked Verifeable Presentations are accessible and verifiable by anyone and they might be accessible at the given URL
 indefinitely. A [holder][holder] might therefore desire to limit the validity of a presentation. This can be achieved by
 utilizing the `expires` property that is an optional element of `proof` property as specified in
 [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY).
@@ -260,25 +260,18 @@ utilizing the `expires` property that is an optional element of `proof` property
 
 _This section is non-normative_
 
-When contemplating the public linking of credentials the [holder][holder] enables anyone to discover and access them.
-Unlike the transmission of credentials upon the request of a [verifier][verifier], it is up to the [holder][holder] to
-ensure that the integrity, authenticity and currentness of the linked presentation and credentials are protected so that
-an unknown future [verifier][verifier] will be able to securely verify the credentials.
+Unlike the interactive exchange of credentials between [holder][holder] and [verifier][verifier], linked verifiable
+presentations are statically linked and published by the [holder][holder]. Any entity that knows the [holder's][holder]
+DID is able to discover, access and verify the linked presentations without interaction between [holder][holder] and
+[verifier][verifier]. This flow requires additional caution from the [holder][holder] to ensure the integrity,
+authenticity and currentness of linked presentations. In addition to the security mechanisms of verifiable credentials
+and presentations [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) the `challenge` and `domain` search parameters in the
+linked presentation URL can help the [holder][holder] to increase the level of protection.
 
-[Verifiers][verifier] will discover references to linked credentials via the DID and the public DID Document of the
-[holder][holder]. The references will require different protocols and services from which the linked credentials will be
-retrieved. Service operators and layers of caches will be able to change or replace the linked credentials. A
-[verifier][verifier] might need to ensure that the used protocol and the received credentials provide the desired
-security guarantees. In addition to the security mechanisms of Verifiable Credentials and Verifiable Presentations
-[[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY), `challenge` and `domain` search parameters in the URI of the linked
-credentials can help reduce the risk.
-
-TODO: add reference to the search parameters security mechansim
-
-Independent of the successful verification of the linked presentation, [verifiers][verifier] should note that a linked
-verifiable presentation only proves control over the DID for creating the link to the presentation. When trying to grant
-access to a service or to perform an action the [verifier][verifier] should create a separate request that proves
-control over the [holder's][holder] DID to mitigate Man-in-the-Middle attacks.
+Independent of the successful verification of linked presentations, [verifiers][verifier] should note that a linked
+verifiable presentation only proves control over the [holder's][holder] DID at the time of link creation.
+[Verifiers][verifier] SHOULD NOT grant access solely based on a linked presentation and SHOULD in addition launch a
+separate interactive request to receive prove control over the [holder's][holder] DID.
 
 ## Conformance
 
