@@ -264,7 +264,7 @@ Unlike the interactive exchange of credentials between [holder][holder] and [ver
 presentations are statically linked and published by the [holder][holder]. Any entity that knows the [holder's][holder]
 DID is able to discover, access and verify the linked presentations without interaction between [holder][holder] and
 [verifier][verifier]. This flow requires additional caution from the [holder][holder] to ensure the integrity,
-authenticity and currentness of linked presentations. In addition to the security mechanisms of verifiable credentials
+authenticity and timeliness of linked presentations. In addition to the security mechanisms of verifiable credentials
 and presentations [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) the `challenge` and `domain` search parameters in the
 linked presentation URL can help the [holder][holder] to increase the level of protection.
 
