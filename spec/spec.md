@@ -195,21 +195,21 @@ parameters in the verification of the presentation as specified in [[VC-DATA-INT
 
 _This section is non-normative_
 
-Since this specification is designed to make verifiable data about a DID publicly discoverable, privacy implications of
+Since this specification is designed to make verifiable data about a DID publicly discoverable, privacy implications
 are important to consider. The publication of verifiable data about a DID is a voluntary decision by the credential
 [holder][holder] and requires an update of the DID document that is under the control of the DID controller. Therefore,
 the publication of verifiable data is a user-centric decision and upholds the principles of Privacy by Design
 [PRIVACY-BY-DESIGN](#ref:PRIVACY-BY-DESIGN).
 
-Outside of this specification and these privacy considerations is the publication of verifiable data about the
+This specification does not recommend the publication of verifiable data about the
 [holder's][holder] DID by a third-party, for example by an [issuer][issuer] or [verifier][verifier].
 
 ### Spectrum of Privacy
 
 _This section is non-normative_
 
-Verifiable Credentials [[spec:VC-DATA-MODEL]] support the full privacy spectrum ranging from pseudonymous to strongly
-identified. The Linked Verifiable Presentations specification strives to support the full privacy spectrum and does not
+Verifiable Credentials [[spec:VC-DATA-MODEL]] accommodate a wide range of privacy levels from pseudonymous to strongly
+identifiable. The Linked Verifiable Presentations specification strives to support the full privacy spectrum and does not
 take philosophical positions on the correct level of anonymity for any specific link. The following sections provide
 guidance for implementers who want to avoid specific scenarios that are hostile to privacy.
 
@@ -220,7 +220,7 @@ _This section is non-normative_
 DID documents and the verifiable credentials data model are highly structured. It is expected that any linked verifiable
 presentation and credential will be indexed. In addition, any verifiable credential must contain the identifier of the
 [issuer][issuer] that could also be de-anonymized and tracked by the publication of the credential. Therefore,
-[holders][holder] are _RECOMMENDED_ not to publish verifiable credentials that contain personally identifying data or
+[holders][holder] are _RECOMMENDED_ not to publish verifiable credentials that contain personally identifiable data or
 data that can be used to correlate and track them or the [issuer][issuer].
 
 ### Selective Disclosure
@@ -229,7 +229,7 @@ _This section is non-normative_
 
 A [holder][holder] might want to withhold information that is part of a Verifiable Credential they want to publish.
 [Issuers][issuer] are _RECOMMENDED_ to support selective disclosure in issued credentials to grant [holders][holder] the
-ability to make fine-grained decisions about the information will be publicly available.
+ability to make fine-grained decisions about the information that will be publicly available.
 
 ## Security Considerations
 
@@ -240,18 +240,18 @@ _This section is non-normative_
 _This section is non-normative_
 
 A [holder][holder] has the power to publish any verifiable credential they are holding. Before including a credential in
-a linked verifiable presetation the [holder][holder] is _RECOMMENDED_ to consider the constraints that are imposed by
+a linked verifiable presentation the [holder][holder] is _RECOMMENDED_ to consider the constraints that are imposed by
 the [issuer][issuer].
 
 [Issuers][issuer] are _RECOMMENDED_ to utilize the mechanisms provided by the verifiable credentials data model
-[[spec:VC-DATA-MODEL]] to express constraints for issued credenditals. For example, the properties `expirationDate` and
+[[spec:VC-DATA-MODEL]] to express constraints for issued credentials. For example, the properties `expirationDate` and
 `termsOfUse` can be used to control or limit the public linking of credentials.
 
 ### Limiting Validity of Verifiable Presentations
 
 _This section is non-normative_
 
-Linked Verifeable Presentations are accessible and verifiable by anyone and they might be accessible at the given URL
+Linked Verifiable Presentations are accessible and verifiable by anyone and they might be accessible at the given URL
 indefinitely. A [holder][holder] might therefore desire to limit the validity of a presentation. This can be achieved by
 utilizing the `expires` property that is an optional element of `proof` property as specified in
 [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY).
@@ -271,7 +271,7 @@ linked presentation URL can help the [holder][holder] to increase the level of p
 Independent of the successful verification of linked presentations, [verifiers][verifier] should note that a linked
 verifiable presentation only proves control over the [holder's][holder] DID at the time of link creation.
 [Verifiers][verifier] SHOULD NOT grant access solely based on a linked presentation and SHOULD in addition launch a
-separate interactive request to receive prove control over the [holder's][holder] DID.
+separate interactive request to receive proof of control over the [holder's][holder] DID.
 
 ## Conformance
 
