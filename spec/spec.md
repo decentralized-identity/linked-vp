@@ -44,7 +44,7 @@ discover and access these VCs because the application would need to implement a 
 
 - Linking an official business registration credential (if there was such a thing) to a DNS name to reduce the burden of
   verifying the authenticity of a website.
-- Making the mandatory imprint page on a website machine readable by self-issuing an imprint credential and connecting
+- Making the mandatory imprint page on a website machine-readable by self-issuing an imprint credential and connecting
   it to the DID of the website to reduce the burden of vistors to extract relevant data from the imprint page.
 - for whom is this useful
   - public entities
@@ -195,22 +195,22 @@ parameters in the verification of the presentation as specified in [[VC-DATA-INT
 
 _This section is non-normative_
 
-Since this specification is designed to make verifiable data about a DID publicly discoverable, privacy implications
-are important to consider. The publication of verifiable data about a DID is a voluntary decision by the credential
+Since this specification is designed to make verifiable data about a DID publicly discoverable, privacy implications are
+important to consider. The publication of verifiable data about a DID is a voluntary decision by the credential
 [holder][holder] and requires an update of the DID document that is under the control of the DID controller. Therefore,
 the publication of verifiable data is a user-centric decision and upholds the principles of Privacy by Design
 [PRIVACY-BY-DESIGN](#ref:PRIVACY-BY-DESIGN).
 
-This specification does not recommend the publication of verifiable data about the
-[holder's][holder] DID by a third-party, for example by an [issuer][issuer] or [verifier][verifier].
+This specification does not recommend the publication of verifiable data about the [holder's][holder] DID by a third
+party, for example by an [issuer][issuer] or [verifier][verifier].
 
 ### Spectrum of Privacy
 
 _This section is non-normative_
 
 Verifiable Credentials [[spec:VC-DATA-MODEL]] accommodate a wide range of privacy levels from pseudonymous to strongly
-identifiable. The Linked Verifiable Presentations specification strives to support the full privacy spectrum and does not
-take philosophical positions on the correct level of anonymity for any specific link. The following sections provide
+identifiable. The Linked Verifiable Presentations specification strives to support the full privacy spectrum and does
+not take philosophical positions on the correct level of anonymity for any specific link. The following sections provide
 guidance for implementers who want to avoid specific scenarios that are hostile to privacy.
 
 ### Personally Identifiable Information
@@ -251,7 +251,7 @@ the [issuer][issuer].
 
 _This section is non-normative_
 
-Linked Verifiable Presentations are accessible and verifiable by anyone and they might be accessible at the given URL
+Linked Verifiable Presentations are accessible and verifiable by anyone, and they might be accessible at the given URL
 indefinitely. A [holder][holder] might therefore desire to limit the validity of a presentation. This can be achieved by
 utilizing the `expires` property that is an optional element of `proof` property as specified in
 [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY).
@@ -278,7 +278,7 @@ separate interactive request to receive proof of control over the [holder's][hol
 As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this
 specification are non-normative. Everything else in this specification is normative.
 
-The key words MAY, MUST, MUST NOT, and SHOULD in this document are to be interpreted as described in BCP 14
+The keywords MAY, MUST, MUST NOT, and SHOULD in this document are to be interpreted as described in BCP 14
 [[spec-inform:RFC2119]] [[spec-inform:RFC8174]] when, and only when, they appear in all capitals, as shown here.
 
 This document contains examples that contain JSON and JSON-LD content. Some of these examples contain characters that
@@ -371,7 +371,7 @@ The following projects are working on Linked Verifiable Presentations and Creden
 - The [did:web Method Specification](https://w3c-ccg.github.io/did-method-web/) defines how to discover a did:web DID
   for a DNS name (unidirectional) via the `/.well-known/did.json` path.
 - The [Well Known DID Configuration](https://identity.foundation/.well-known/resources/did-configuration/) specification
-  defines how to create a bi-directional relationship between a DID, independent of the DID method, and a DNS name via
+  defines how to create a bidirectional relationship between a DID, independent of the DID method, and a DNS name via
   the `/.well-known/did-configuration.json` path.
 
 [issuer]: https://www.w3.org/TR/vc-data-model-1.1/#dfn-issuers
