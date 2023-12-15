@@ -49,7 +49,7 @@ discover and access these VCs because the application would need to implement a 
 - for whom is this useful
   - public entities
   - long-lived identifiers
-- publicly proof ownership over a domain name - Well-known DID Configuration + published published credential
+- public proof ownership over a domain name - Well-known DID Configuration + published credential
 
 ## Abstract
 
