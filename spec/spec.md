@@ -272,7 +272,9 @@ receive the authorized and most up to date and version of the presentation.
 Independent of the successful verification of linked presentations, [verifiers][verifier] should note that a linked
 verifiable presentation only proves control over the [holder's][holder] DID at the time of link creation.
 [Verifiers][verifier] SHOULD NOT grant access solely based on a linked presentation and SHOULD in addition launch a
-separate interactive request to receive proof of control over the [holder's][holder] DID.
+separate interactive request to receive proof of control over the [holder's][holder] DID. Furthermore,
+[verifiers][verifier] SHOULD ensure that the [holder's][holder] DID is referenced as subject in every verifiable
+credential to establish whether the credential applies to the [holder][holder].
 
 ## Conformance
 
