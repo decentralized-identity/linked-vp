@@ -40,23 +40,32 @@ credential. While this data exchange is important for VCs that shall be kept pri
 VCs public. For public VCs the required data exchange increases the complexity of applications that want to discover and
 access these VCs because the application would need to implement a data exchange protocol.
 
-## Potential Use Cases
-
-- Linking an official business registration credential (if there was such a thing) to a DNS name to reduce the burden of
-  verifying the authenticity of a website.
-- Making the mandatory imprint page on a website machine readable by self-issuing an imprint credential and connecting
-  it to the DID of the website to reduce the burden of vistors to extract relevant data from the imprint page.
-
 ## Abstract
 
 Verifiable Credentials are designed to be shared between entities. How this is done via private communication channels
-is specified by protocols like [DIDComm](#ref:DIDCOMM-MESSAGING) and
-[OIDC4VC](#ref:OPENID-4-VERIFIABLE-CREDENTIAL-ISSUANCE). This document complements the private communication channel by
-defining how to share, discover and retrieve Verifiable Credentials publicly via a service entry in a "DID Document".
+is specified by protocols like [[DIDComm]](#ref:DIDCOMM-MESSAGING) and
+[[OIDC4VC]](#ref:OPENID-4-VERIFIABLE-CREDENTIAL-ISSUANCE). This document complements the private communication channel
+by defining how to share, discover and retrieve Verifiable Credentials publicly via a service entry in a "DID Document".
 
 The Verifiable Credentials specification supports multiple different identifiers. This specification does NOT specify
 how to publish Verifiable Credentials for other valid identifiers apart from DIDs. Furthermore, this specification does
 NOT specify how Verifiable Credentials are created, modified or deleted at a service endpoint.
+
+### Use Cases
+
+_This section is non-normative._
+
+The contributors to this specification provided the following incomplete list of use cases that appeal to them:
+
+- Public bidirectional linkage between a DNS origin and a DID as defined by
+  [[DID-CONFIGURATION]](#ref:DID-CONFIGURATION).
+- Provide publicly verifiable information about DIDs used by companies to simplify the onboarding process of suppliers
+  and customers. Example credentials:
+  - Business registration credential that contains name, address and line of business.
+  - Attestation of compliance with the ISO 27001 standard issued by a certification organization.
+- Verifiable and machine-readable credential of the mandatory imprint page for company websites.
+- Decentralized business network of people who publicly verifiably share their educational background and work
+  experience.
 
 ## Status of This Document
 
@@ -165,6 +174,11 @@ Implementations MUST comply with relevant normative statements in DID Configurat
 ### Informative References
 
 <dl>
+  <dt id="ref:DID-CONFIGURATION">DID-CONFIGURATION</dt>
+  <dd>
+    <cite><a href="https://identity.foundation/.well-known/resources/did-configuration/">Well Known DID Configuration</a></cite>.
+        Daniel Buchner; Orie Steele; Tobias Looker; 2023. <span class="reference-status">Status: Working Group Approved.</span>
+  </dd>
   <dt id="ref:DIDCOMM-MESSAGING">DIDCOMM-MESSAGING</dt>
   <dd>
     <cite><a href="https://identity.foundation/didcomm-messaging/spec/">DIDComm Messaging</a></cite>.
