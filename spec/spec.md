@@ -66,6 +66,8 @@ The contributors to this specification provided the following incomplete list of
 - Verifiable and machine-readable credential of the mandatory imprint page for company websites.
 - Decentralized business network of people who publicly verifiably share their educational background and work
   experience.
+- Replicate functionality of X.509 certificates that contain information about the issuers and holders with DIDs and
+  Verifiable Credentials.
 
 ## Status of This Document
 
