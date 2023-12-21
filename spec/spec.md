@@ -28,18 +28,6 @@
 
 ---
 
-## Motivation
-
-Currently, there are multiple specifications for discovering DIDs that are accosiated with DNS names, see
-[references](#references). However, there's currently no specification that makes Verifiable Presentations and
-Credentials discoverable that belong to a DID or to a DNS name.
-
-Currently, the only way an application or web service can access VCs of a DID is to use a data exchange protocol like
-[OpenID4VC](https://openid.net/openid4vc/) or [DIDComm](https://didcomm.org/) to request and receive the desired
-credential. While this data exchange is important for VCs that shall be kept private, Holders might desire to make other
-VCs public. For public VCs the required data exchange increases the complexity of applications that want to discover and
-access these VCs because the application would need to implement a data exchange protocol.
-
 ## Potential Use Cases
 
 - Linking an official business registration credential (if there was such a thing) to a DNS name to reduce the burden of
