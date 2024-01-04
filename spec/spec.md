@@ -256,8 +256,9 @@ _This section is non-normative_
 
 Linked Verifiable Presentations are accessible and verifiable by anyone, and they might be accessible at the given URL
 indefinitely. A [holder][holder] might therefore desire to limit the validity of a presentation. This can be achieved by
-utilizing the `expires` property that is an optional element of `proof` property as specified in
-[[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY).
+utilizing the `expires` property that is an optional element of `proof` property as specified by
+[[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) for presentations in JSON-LD format. Respectively, the property `exp` can
+be used for presentations in JWT format [[spec-inform:RFC7519]].
 
 ### Verification of Linked Presentations
 
