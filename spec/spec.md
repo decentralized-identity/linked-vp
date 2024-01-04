@@ -109,7 +109,7 @@ parameters in the verification of the presentation as specified in [[VC-DATA-INT
 - The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an array which MUST
   contain one or more Uniform Resource Locators as described in [[spec:RFC3986]].
 
-### Example DID Document with LinkedVerifiablePresentations service endpoints
+### Example: DID Document with LinkedVerifiablePresentations Service Endpoints
 
 ```json
 {
@@ -132,10 +132,7 @@ parameters in the verification of the presentation as specified in [[VC-DATA-INT
     {
       "id": "did:example:123#foo",
       "type": "LinkedVerifiablePresentations",
-      "serviceEndpoint": [
-        "https://foo.example.com/verifiable-presentation.jsonld?challenge=hGa8Vx5JPt&domain=bar.example.com",
-        "https://bar.example.com/verifiable-presentation.json"
-      ]
+      "serviceEndpoint": ["https://bar.example.com/verifiable-presentation.jsonld"]
     },
     {
       "id": "did:example:123#baz",
@@ -146,7 +143,9 @@ parameters in the verification of the presentation as specified in [[VC-DATA-INT
 }
 ```
 
-### Example Linked Verifiable Presentation resource
+### Example: Linked Verifiable Presentation Resource
+
+Linked verifiable presentation with a credential that describes an organization:
 
 ```json
 {
@@ -158,18 +157,29 @@ parameters in the verification of the presentation as specified in [[VC-DATA-INT
   "verifiableCredential": [{
     "@context": [
       "https://www.w3.org/2018/credentials/v1",
-      "https://identity.foundation/.well-known/did-configuration/v1"
+      "https://schema.org/"
     ],
+    "id": "https://bar.example.com/verifiable-presentation.jsonld",
     "issuer": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM",
     "issuanceDate": "2020-12-04T14:08:28-06:00",
     "expirationDate": "2025-12-04T14:08:28-06:00",
     "type": [
       "VerifiableCredential",
-      "DomainLinkageCredential"
+      "Organization"
     ],
     "credentialSubject": {
       "id": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM",
-      "origin": "https://identity.foundation"
+      "legalName": "Example LLC",
+      "telephone": "+1 23456 789",
+      "taxID": "123456789",
+      "location": {
+        "@type": " PostalAddress",
+        "addressCountry": "Example Country",
+        "addressRegion": "Example Region",
+        "addressLocality": "Example City",
+        "postalCode": "12345",
+        "streetAddress": "1 Example Street"
+      }
     },
     "proof": {
       "type": "Ed25519Signature2018",
@@ -183,8 +193,6 @@ parameters in the verification of the presentation as specified in [[VC-DATA-INT
     "type": "Ed25519Signature2020",
     "created": "2023-12-01T08:19:39Z",
     "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
-    "challenge": "hGa8Vx5JPt",
-    "domain": "bar.example.com",
     "proofPurpose": "assertionMethod",
     "proofValue": "z58DAdFfa9SkqZMVPxAQpic7ndSayn1PzZs6ZjWp1CktyGesjuTSwRdoWhAfGFCF5bppETSTojQCrfFPP2oumHKtz"
   }]
