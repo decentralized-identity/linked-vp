@@ -94,11 +94,6 @@ and link verifiable presentations with verifiable credentials that SHALL be publ
 Presentations referenced within the `LinkedVerifiablePresentations` endpoint descriptor can then be crawled by verifying
 parties to locate and verify any presentation resources that may exist.
 
-The DID Controller MAY include the parameters `challenge` and `domain` in the URL of the service endpoint and proof of
-the referenced Verifiable Presentation to mitigate replay attacks. If present, a [verifier][verifier] SHOULD include the
-parameters in the verification of the presentation as specified in [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) and
-[[VC-DATA-MODEL]].
-
 ### Linked Verifiable Presentations
 
 `LinkedVerifiablePresentations` endpoint descriptors are JSON objects composed as follows:
@@ -272,10 +267,9 @@ Unlike the interactive exchange of credentials between [holder][holder] and [ver
 presentations are statically linked and published by the [holder][holder]. Any entity that knows the [holder's][holder]
 DID is able to discover, access and verify the linked presentations without interaction between [holder][holder] and
 [verifier][verifier]. This flow requires additional caution from the [holder][holder] to ensure the integrity,
-authenticity and timeliness of linked presentations. In addition to the security mechanisms of verifiable credentials
-and presentations [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY), the `challenge` and `domain` search parameters in the
-linked presentation URL can help the [holder][holder] to increase the level of assurance that [verifiers][verifier] will
-receive the authorized and most up to date and version of the presentation.
+authenticity and timeliness of linked presentations. The security properties `nonce`, `challenge`, and `domain` that are
+useful for interactive challenge-response protocols as specified by verifiable credential data
+[[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) can not be used to secure linked presentations.
 
 Independent of the successful verification of linked presentations, [verifiers][verifier] should note that a linked
 verifiable presentation only proves control over the [holder's][holder] DID at the time of link creation.
