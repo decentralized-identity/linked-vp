@@ -110,7 +110,7 @@ parties to locate and verify any presentation resources that may exist.
 {
   "@context": [
     "https://www.w3.org/ns/did/v1",
-    "https://identity.foundation/linked-vp/v1"
+    "https://identity.foundation/contexts/linked-vp/v1"
   ],
   "id": "did:example:123",
   "verificationMethod": [{
