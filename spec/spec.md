@@ -140,57 +140,124 @@ parties to locate and verify any presentation resources that may exist.
 
 ### Example: Linked Verifiable Presentation Resource
 
-Linked verifiable presentation with a credential that describes an organization:
+Linked verifiable presentation with a credential that describes an organization.
+
+#### JSON-LD Format
 
 ```json
-{
-  "@context": [
-    "https://www.w3.org/2018/credentials/v1"
-  ],
-  "type": ["VerifiablePresentation"],
-  "holder": "did:example:123",
-  "verifiableCredential": [{
+"@context": [ "https://www.w3.org/2018/credentials/v1" ],
+"holder": "did:example:123",
+"type": [ "VerifiablePresentation" ],
+"verifiableCredential": [
+  {
     "@context": [
       "https://www.w3.org/2018/credentials/v1",
-      "https://schema.org/"
+      { "schema": "https://schema.org/" }
     ],
-    "id": "https://bar.example.com/verifiable-presentation.jsonld",
-    "issuer": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM",
-    "issuanceDate": "2020-12-04T14:08:28-06:00",
-    "expirationDate": "2025-12-04T14:08:28-06:00",
+    "issuer": "did:example:123",
+    "issuanceDate": "2024-01-05T10:31:51+01:00",
+    "expirationDate": "2029-01-05T10:31:51+01:00",
     "type": [
       "VerifiableCredential",
-      "Organization"
+      "schema:Organization"
     ],
     "credentialSubject": {
-      "id": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM",
-      "legalName": "Example LLC",
-      "telephone": "+1 23456 789",
-      "taxID": "123456789",
-      "location": {
+      "id": "did:example:123",
+      "schema:legalName": "Example LLC",
+      "schema:telephone": "+1 23456 789",
+      "schema:taxID": "123456789",
+      "schema:location": {
         "@type": " PostalAddress",
-        "addressCountry": "Example Country",
-        "addressRegion": "Example Region",
-        "addressLocality": "Example City",
-        "postalCode": "12345",
-        "streetAddress": "1 Example Street"
+        "schema:addressCountry": "Example Country",
+        "schema:addressRegion": "Example Region",
+        "schema:addressLocality": "Example City",
+        "schema:postalCode": "12345",
+        "schema:streetAddress": "1 Example Street"
       }
     },
     "proof": {
       "type": "Ed25519Signature2018",
-      "created": "2020-12-04T20:08:28.540Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..D0eDhglCMEjxDV9f_SNxsuU-r3ZB9GR4vaM9TYbyV7yzs1WfdUyYO8rFZdedHbwQafYy8YOpJ1iJlkSmB4JaDQ",
+      "created": "2024-01-05T09:31:51Z",
+      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
       "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM#z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM"
+      "jws": {
+        "0": 72,
+        "...": 243,
+      }
     }
-  }],
-  "proof": [{
-    "type": "Ed25519Signature2020",
-    "created": "2023-12-01T08:19:39Z",
-    "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
-    "proofPurpose": "assertionMethod",
-    "proofValue": "z58DAdFfa9SkqZMVPxAQpic7ndSayn1PzZs6ZjWp1CktyGesjuTSwRdoWhAfGFCF5bppETSTojQCrfFPP2oumHKtz"
-  }]
+  }
+],
+"id": "https://bar.example.com/verifiable-presentation.jsonld",
+"proof": {
+  "type": "Ed25519Signature2018",
+  "created": "2024-01-05T09:31:51Z",
+  "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+  "proofPurpose": "assertionMethod",
+  "jws": {
+    "0": 2,
+    "...": 76,
+  }
+}
+```
+
+#### JSON Web Token Format
+
+```
+eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDpleGFtcGxlOjEyMyNfUXEwVUwyRnE2NTFRMEZqZDZUdm5ZRS1mYUhpT3BSbFBWUWNZXy10QTRBIiwidHlwIjoiJ3ZwK2xkK2p3dCcifQ.eyJzdWIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3MiOiJkaWQ6ZXhhbXBsZToxMjMiLCJuYmYiOjE3MDQ0NDcxMTEsImlhdCI6MTcwNDQ0NzExMSwiZXhwIjoxODYyMjk5OTExLCJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSJdLCJob2xkZXIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJ0eXBlIjpbIlZlcmlmaWFibGVQcmVzZW50YXRpb24iXSwidmVyaWZpYWJsZUNyZWRlbnRpYWwiOlt7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIix7InNjaGVtYSI6Imh0dHBzOi8vc2NoZW1hLm9yZy8ifV0sImlzc3VlciI6ImRpZDpleGFtcGxlOjEyMyIsImlzc3VhbmNlRGF0ZSI6IjIwMjQtMDEtMDVUMTA6MzE6NTErMDE6MDAiLCJleHBpcmF0aW9uRGF0ZSI6IjIwMjktMDEtMDVUMTA6MzE6NTErMDE6MDAiLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIiwic2NoZW1hOk9yZ2FuaXphdGlvbiJdLCJjcmVkZW50aWFsU3ViamVjdCI6eyJpZCI6ImRpZDpleGFtcGxlOjEyMyIsInNjaGVtYTpsZWdhbE5hbWUiOiJFeGFtcGxlIExMQyIsInNjaGVtYTp0ZWxlcGhvbmUiOiIrMSAyMzQ1NiA3ODkiLCJzY2hlbWE6dGF4SUQiOiIxMjM0NTY3ODkiLCJzY2hlbWE6bG9jYXRpb24iOnsiQHR5cGUiOiIgUG9zdGFsQWRkcmVzcyIsInNjaGVtYTphZGRyZXNzQ291bnRyeSI6IkV4YW1wbGUgQ291bnRyeSIsInNjaGVtYTphZGRyZXNzUmVnaW9uIjoiRXhhbXBsZSBSZWdpb24iLCJzY2hlbWE6YWRkcmVzc0xvY2FsaXR5IjoiRXhhbXBsZSBDaXR5Iiwic2NoZW1hOnBvc3RhbENvZGUiOiIxMjM0NSIsInNjaGVtYTpzdHJlZXRBZGRyZXNzIjoiMSBFeGFtcGxlIFN0cmVldCJ9fSwicHJvb2YiOnsidHlwZSI6IkVkMjU1MTlTaWduYXR1cmUyMDE4IiwiY3JlYXRlZCI6IjIwMjQtMDEtMDVUMDk6MzE6NTFaIiwidmVyaWZpY2F0aW9uTWV0aG9kIjoiZGlkOmV4YW1wbGU6MTIzI19RcTBVTDJGcTY1MVEwRmpkNlR2bllFLWZhSGlPcFJsUFZRY1lfLXRBNEEiLCJwcm9vZlB1cnBvc2UiOiJhc3NlcnRpb25NZXRob2QiLCJqd3MiOnsiMCI6NzIsIjEiOjI0MywiMiI6MTU1LCIzIjoxMDEsIjQiOjEzMiwiNSI6MTk5LCI2Ijo5OCwiNyI6MTk0LCI4IjoxMzMsIjkiOjE5MSwiMTAiOjEyNSwiMTEiOjI1MiwiMTIiOjE2MiwiMTMiOjE5NiwiMTQiOjIzLCIxNSI6OCwiMTYiOjIyMywiMTciOjcwLCIxOCI6NjgsIjE5Ijo0LCIyMCI6MjQsIjIxIjoxOTgsIjIyIjoxMTgsIjIzIjoxNDQsIjI0IjoyMDgsIjI1Ijo5NSwiMjYiOjIwOSwiMjciOjQ0LCIyOCI6MjQzLCIyOSI6MTE2LCIzMCI6MTgzLCIzMSI6MTkzLCIzMiI6MjUzLCIzMyI6MTIxLCIzNCI6MTYxLCIzNSI6MjAzLCIzNiI6ODEsIjM3IjoxODgsIjM4Ijo3MSwiMzkiOjIzMCwiNDAiOjU0LCI0MSI6MTE3LCI0MiI6ODgsIjQzIjoyMzAsIjQ0Ijo0MiwiNDUiOjI0OSwiNDYiOjIxNywiNDciOjcxLCI0OCI6MTYzLCI0OSI6MTc4LCI1MCI6MTc2LCI1MSI6MjMsIjUyIjoxMjcsIjUzIjoxMTgsIjU0IjoyMCwiNTUiOjgzLCI1NiI6MTk1LCI1NyI6NjIsIjU4Ijo0NiwiNTkiOjU4LCI2MCI6MTkxLCI2MSI6MTgyLCI2MiI6MTQ0LCI2MyI6MTV9fX1dLCJpZCI6Imh0dHBzOi8vYmFyLmV4YW1wbGUuY29tL3ZlcmlmaWFibGUtcHJlc2VudGF0aW9uLmpzb25sZCJ9.vfxzL9AKYYqaFCIUUKXGo8yC9PFOaBPI-3ZkLpKxHzY_rvEOjt7qF7vIgyDD8jCjwAM8bpBtOdPddPYLAuDrDw
+```
+
+Example of the decoded JWT Header:
+
+```json
+{ "alg": "EdDSA", "kid": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A", "typ": "'vp+ld+jwt'" }
+```
+
+Example of decoded JWT Payload:
+
+```json
+{
+  "sub": "did:example:123",
+  "iss": "did:example:123",
+  "nbf": 1704447111,
+  "iat": 1704447111,
+  "exp": 1862299911,
+  "@context": ["https://www.w3.org/2018/credentials/v1"],
+  "holder": "did:example:123",
+  "type": ["VerifiablePresentation"],
+  "verifiableCredential": [
+    {
+      "@context": ["https://www.w3.org/2018/credentials/v1", { "schema": "https://schema.org/" }],
+      "issuer": "did:example:123",
+      "issuanceDate": "2024-01-05T10:31:51+01:00",
+      "expirationDate": "2029-01-05T10:31:51+01:00",
+      "type": ["VerifiableCredential", "schema:Organization"],
+      "credentialSubject": {
+        "id": "did:example:123",
+        "schema:legalName": "Example LLC",
+        "schema:telephone": "+1 23456 789",
+        "schema:taxID": "123456789",
+        "schema:location": {
+          "@type": " PostalAddress",
+          "schema:addressCountry": "Example Country",
+          "schema:addressRegion": "Example Region",
+          "schema:addressLocality": "Example City",
+          "schema:postalCode": "12345",
+          "schema:streetAddress": "1 Example Street"
+        }
+      },
+      "proof": {
+        "type": "Ed25519Signature2018",
+        "created": "2024-01-05T09:31:51Z",
+        "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+        "proofPurpose": "assertionMethod",
+        "jws": {
+          "0": 72,
+          "...": 243
+        }
+      }
+    }
+  ],
+  "id": "https://bar.example.com/verifiable-presentation.jsonld"
 }
 ```
 
