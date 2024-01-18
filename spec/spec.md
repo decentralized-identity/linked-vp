@@ -14,6 +14,10 @@
 
 **Authors:**
 
+~ [Brian Richter](https://www.linkedin.com/in/brianrichter3) (Aviary Technologies)
+
+~ [Markus Sabadello](https://www.linkedin.com/in/markus-sabadello-353a0821) (Danube Tech)
+
 ~ Others?
 
 <!-- -->
