@@ -1,4 +1,4 @@
-# Linked Verifiable Presentations v0.1.0
+# Linked Verifiable Presentation v0.1.0
 
 **Specification Status:** [Draft](https://github.com/decentralized-identity/org/blob/master/work-item-lifecycle.md)
 
@@ -63,7 +63,7 @@ The contributors to this specification provided the following incomplete list of
 
 ## Status of This Document
 
-Linked Verifiable Presentations is a draft specification under development within the
+Linked Verifiable Presentation is a draft specification under development within the
 [Decentralized Identity Foundation](https://identity.foundation) (DIF), and designed to incorporate the requirements and
 learnings from related work of the most active industry players into a shared specification that meets the collective
 needs of the community. This spec is regularly updated to reflect relevant changes, and we encourage active engagement
@@ -93,7 +93,7 @@ and link verifiable presentations with verifiable credentials that SHALL be publ
 Presentations referenced within the `LinkedVerifiablePresentation` endpoint descriptor can then be crawled by verifying
 parties to locate and verify any presentation resources that may exist.
 
-### Linked Verifiable Presentations
+### Linked Verifiable Presentation
 
 `LinkedVerifiablePresentation` endpoint descriptors are JSON objects composed as follows:
 
@@ -311,8 +311,8 @@ party, for example by an [issuer][issuer] or [verifier][verifier].
 _This section is non-normative_
 
 Verifiable Credentials [[spec:VC-DATA-MODEL]] accommodate a wide range of privacy levels from pseudonymous to strongly
-identifiable. The Linked Verifiable Presentations specification strives to support the full privacy spectrum and does
-not take philosophical positions on the correct level of anonymity for any specific link. The following sections provide
+identifiable. The Linked Verifiable Presentation specification strives to support the full privacy spectrum and does not
+take philosophical positions on the correct level of anonymity for any specific link. The following sections provide
 guidance for implementers who want to avoid specific scenarios that are hostile to privacy.
 
 ### Personally Identifiable Information

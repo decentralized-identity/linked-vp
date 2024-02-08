@@ -1,7 +1,7 @@
 {
   "name": "linked-vp",
   "version": "0.0.1",
-  "description": "Linked Verifiable Presentations Specification",
+  "description": "Linked Verifiable Presentation Specification",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/decentralized-identity/linked-vp.git"

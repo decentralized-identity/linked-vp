@@ -1,4 +1,4 @@
-# Linked Verifiable Presentations Context
+# Linked Verifiable Presentation Context
 
 - [Latest JSON-LD Context](./v1/index.json)
 
