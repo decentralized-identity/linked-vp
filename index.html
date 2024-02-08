@@ -159,20 +159,20 @@ on GitHub (see above) and other mediums (e.g. DIF) where this work is being done
 <h2 id="linked-verifiable-presentation-service-endpoint"><a class="toc-anchor" href="#linked-verifiable-presentation-service-endpoint" >§</a> Linked Verifiable Presentation Service Endpoint</h2>
 <p>To enable the public discovery of verifiable presentations and verifiable credentials for a DID, there must exist a DID
 Document mechanism for expressing locations where verifiable presentations MAY be located. To that end, the following
-section codifies the <code>LinkedVerifiablePresentations</code> service endpoint. The endpoint allows a DID controller to publish
+section codifies the <code>LinkedVerifiablePresentation</code> service endpoint. The endpoint allows a DID controller to publish
 and link verifiable presentations with verifiable credentials that SHALL be publicly associated with the DID.
-Presentations referenced within the <code>LinkedVerifiablePresentations</code> endpoint descriptor can then be crawled by verifying
+Presentations referenced within the <code>LinkedVerifiablePresentation</code> endpoint descriptor can then be crawled by verifying
 parties to locate and verify any presentation resources that may exist.</p>
 <h3 id="linked-verifiable-presentations"><a class="toc-anchor" href="#linked-verifiable-presentations" >§</a> Linked Verifiable Presentations</h3>
-<p><code>LinkedVerifiablePresentations</code> endpoint descriptors are JSON objects composed as follows:</p>
+<p><code>LinkedVerifiablePresentation</code> endpoint descriptors are JSON objects composed as follows:</p>
 <ul>
 <li>The object MUST contain an <code>id</code> property, and its value MUST be a valid URI conforming to [<a class="spec-reference" href="#ref:RFC3986">RFC3986</a>] as
 described in [<a class="spec-reference" href="#ref:DID-CORE">DID-CORE</a>].</li>
-<li>The object MUST contain a <code>type</code> property, and its value MUST be the string “LinkedVerifiablePresentations”.</li>
+<li>The object MUST contain a <code>type</code> property, and its value MUST be the string “LinkedVerifiablePresentation”.</li>
 <li>The object MUST contain a <code>serviceEndpoint</code> property, and its value MUST be either a string or an array which MUST
 contain one or more Uniform Resource Locators as described in [<a class="spec-reference" href="#ref:RFC3986">RFC3986</a>].</li>
 </ul>
-<h3 id="example-did-document-with-linkedverifiablepresentations-service-endpoints"><a class="toc-anchor" href="#example-did-document-with-linkedverifiablepresentations-service-endpoints" >§</a> Example: DID Document with LinkedVerifiablePresentations Service Endpoints</h3>
+<h3 id="example-did-document-with-linkedverifiablepresentation-service-endpoints"><a class="toc-anchor" href="#example-did-document-with-linkedverifiablepresentation-service-endpoints" >§</a> Example: DID Document with LinkedVerifiablePresentation Service Endpoints</h3>
 <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token string">"https://www.w3.org/ns/did/v1"</span><span class="token punctuation">,</span>
@@ -192,12 +192,12 @@ contain one or more Uniform Resource Locators as described in [<a class="spec-re
   <span class="token property">"service"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">{</span>
       <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#foo"</span><span class="token punctuation">,</span>
-      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"LinkedVerifiablePresentations"</span><span class="token punctuation">,</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"LinkedVerifiablePresentation"</span><span class="token punctuation">,</span>
       <span class="token property">"serviceEndpoint"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"https://bar.example.com/verifiable-presentation.jsonld"</span><span class="token punctuation">]</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">{</span>
       <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#baz"</span><span class="token punctuation">,</span>
-      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"LinkedVerifiablePresentations"</span><span class="token punctuation">,</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"LinkedVerifiablePresentation"</span><span class="token punctuation">,</span>
       <span class="token property">"serviceEndpoint"</span><span class="token operator">:</span> <span class="token string">"ipfs://bafybeihkoviema7g3gxyt6la7vd5ho32ictqbilu3wnlo3rs7ewhnp7lly/verifiable-presentation.jwt"</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">]</span>
@@ -535,7 +535,7 @@ MUST comply with relevant normative statements in that section.</p>
 <li><a href="#linked-verifiable-presentation-service-endpoint" >Linked Verifiable Presentation Service Endpoint</a>
 <ul>
 <li><a href="#linked-verifiable-presentations" >Linked Verifiable Presentations</a></li>
-<li><a href="#example-did-document-with-linkedverifiablepresentations-service-endpoints" >Example: DID Document with LinkedVerifiablePresentations Service Endpoints</a></li>
+<li><a href="#example-did-document-with-linkedverifiablepresentation-service-endpoints" >Example: DID Document with LinkedVerifiablePresentation Service Endpoints</a></li>
 <li><a href="#example-linked-verifiable-presentation-resource" >Example: Linked Verifiable Presentation Resource</a>
 <ul>
 <li><a href="#json-ld-format" >JSON-LD Format</a></li>
