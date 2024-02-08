@@ -109,7 +109,7 @@ parties to locate and verify any presentation resources that may exist.
 {
   "@context": [
     "https://www.w3.org/ns/did/v1",
-    "https://identity.foundation/linked-vp/v1"
+    "https://identity.foundation/contexts/linked-vp/v1"
   ],
   "id": "did:example:123",
   "verificationMethod": [{
@@ -139,57 +139,157 @@ parties to locate and verify any presentation resources that may exist.
 
 ### Example: Linked Verifiable Presentation Resource
 
-Linked verifiable presentation with a credential that describes an organization:
+Linked verifiable presentation with a credential that describes an organization.
+
+#### JSON-LD Format
 
 ```json
 {
   "@context": [
     "https://www.w3.org/2018/credentials/v1"
   ],
-  "type": ["VerifiablePresentation"],
   "holder": "did:example:123",
-  "verifiableCredential": [{
-    "@context": [
-      "https://www.w3.org/2018/credentials/v1",
-      "https://schema.org/"
-    ],
-    "id": "https://bar.example.com/verifiable-presentation.jsonld",
-    "issuer": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM",
-    "issuanceDate": "2020-12-04T14:08:28-06:00",
-    "expirationDate": "2025-12-04T14:08:28-06:00",
-    "type": [
-      "VerifiableCredential",
-      "Organization"
-    ],
-    "credentialSubject": {
-      "id": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM",
-      "legalName": "Example LLC",
-      "telephone": "+1 23456 789",
-      "taxID": "123456789",
-      "location": {
-        "@type": " PostalAddress",
-        "addressCountry": "Example Country",
-        "addressRegion": "Example Region",
-        "addressLocality": "Example City",
-        "postalCode": "12345",
-        "streetAddress": "1 Example Street"
+  "type": [
+    "VerifiablePresentation"
+  ],
+  "verifiableCredential": [
+    {
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        {
+          "schema": "https://schema.org/"
+        }
+      ],
+      "issuer": "did:example:123",
+      "issuanceDate": "2024-02-08T18:38:46+01:00",
+      "expirationDate": "2029-02-08T18:38:46+01:00",
+      "type": [
+        "VerifiableCredential",
+        "schema:Organization"
+      ],
+      "credentialSubject": {
+        "id": "did:example:123",
+        "schema:legalName": "Example LLC",
+        "schema:telephone": "+1 23456 789",
+        "schema:taxID": "123456789",
+        "schema:location": {
+          "@type": " PostalAddress",
+          "schema:addressCountry": "Example Country",
+          "schema:addressRegion": "Example Region",
+          "schema:addressLocality": "Example City",
+          "schema:postalCode": "12345",
+          "schema:streetAddress": "1 Example Street"
+        }
+      },
+      "proof": {
+        "type": "Ed25519Signature2018",
+        "created": "2024-02-08T17:38:46Z",
+        "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+        "proofPurpose": "assertionMethod",
+        "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..qD1a-op-GWkvzI5LaAXqJhJv-9WCSTgtEUzUvDeuiaUSDWpVUh14x5TUbGNvmx1xZ0fEf5eWZWoJ-2dogDpmBQ"
       }
-    },
-    "proof": {
-      "type": "Ed25519Signature2018",
-      "created": "2020-12-04T20:08:28.540Z",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..D0eDhglCMEjxDV9f_SNxsuU-r3ZB9GR4vaM9TYbyV7yzs1WfdUyYO8rFZdedHbwQafYy8YOpJ1iJlkSmB4JaDQ",
-      "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM#z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM"
     }
-  }],
-  "proof": [{
-    "type": "Ed25519Signature2020",
-    "created": "2023-12-01T08:19:39Z",
+  ],
+  "id": "https://bar.example.com/verifiable-presentation.jsonld",
+  "proof": {
+    "type": "Ed25519Signature2018",
+    "created": "2024-02-08T17:38:46Z",
     "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z58DAdFfa9SkqZMVPxAQpic7ndSayn1PzZs6ZjWp1CktyGesjuTSwRdoWhAfGFCF5bppETSTojQCrfFPP2oumHKtz"
-  }]
+    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..6_k6Dbgug-XvksZvDVi9UxUTAmQ0J76pjdrQyNaQL7eVMmP_SUPZCqso6EN3aEKFSsJrjDJoPJa9rBK99mXvDw"
+  }
+}
+```
+
+#### JSON Web Token Format
+
+```
+eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDpleGFtcGxlOjEyMyNfUXEwVUwyRnE2NTFRMEZqZDZUdm5ZRS1mYUhpT3BSbFBWUWNZXy10QTRBIiwidHlwIjoiJ3ZwK2xkK2p3dCcifQ.eyJzdWIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3MiOiJkaWQ6ZXhhbXBsZToxMjMiLCJuYmYiOjE3MDc0MTM5MjYsImlhdCI6MTcwNzQxMzkyNiwiZXhwIjoxODY1MjY2NzI2LCJ2cCI6eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSJdLCJob2xkZXIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJ0eXBlIjpbIlZlcmlmaWFibGVQcmVzZW50YXRpb24iXSwidmVyaWZpYWJsZUNyZWRlbnRpYWwiOlsiZXlKaGJHY2lPaUpGWkVSVFFTSXNJbXRwWkNJNkltUnBaRHBsZUdGdGNHeGxPakV5TXlOZlVYRXdWVXd5Um5FMk5URlJNRVpxWkRaVWRtNVpSUzFtWVVocFQzQlNiRkJXVVdOWlh5MTBRVFJCSWl3aWRIbHdJam9pSjNaaksyeGtLMnAzZENjaWZRLmV5SnpkV0lpT2lKa2FXUTZaWGhoYlhCc1pUb3hNak1pTENKcGMzTWlPaUprYVdRNlpYaGhiWEJzWlRveE1qTWlMQ0p1WW1ZaU9qRTNNRGMwTVRNNU1qWXNJbWxoZENJNk1UY3dOelF4TXpreU5pd2laWGh3SWpveE9EWTFNalkyTnpJMkxDSjJZeUk2ZXlKQVkyOXVkR1Y0ZENJNld5Sm9kSFJ3Y3pvdkwzZDNkeTUzTXk1dmNtY3ZNakF4T0M5amNtVmtaVzUwYVdGc2N5OTJNU0lzZXlKelkyaGxiV0VpT2lKb2RIUndjem92TDNOamFHVnRZUzV2Y21jdkluMWRMQ0pwYzNOMVpYSWlPaUprYVdRNlpYaGhiWEJzWlRveE1qTWlMQ0pwYzNOMVlXNWpaVVJoZEdVaU9pSXlNREkwTFRBeUxUQTRWREU0T2pNNE9qUTJLekF4T2pBd0lpd2laWGh3YVhKaGRHbHZia1JoZEdVaU9pSXlNREk1TFRBeUxUQTRWREU0T2pNNE9qUTJLekF4T2pBd0lpd2lkSGx3WlNJNld5SldaWEpwWm1saFlteGxRM0psWkdWdWRHbGhiQ0lzSW5OamFHVnRZVHBQY21kaGJtbDZZWFJwYjI0aVhTd2lZM0psWkdWdWRHbGhiRk4xWW1wbFkzUWlPbnNpYVdRaU9pSmthV1E2WlhoaGJYQnNaVG94TWpNaUxDSnpZMmhsYldFNmJHVm5ZV3hPWVcxbElqb2lSWGhoYlhCc1pTQk1URU1pTENKelkyaGxiV0U2ZEdWc1pYQm9iMjVsSWpvaUt6RWdNak0wTlRZZ056ZzVJaXdpYzJOb1pXMWhPblJoZUVsRUlqb2lNVEl6TkRVMk56ZzVJaXdpYzJOb1pXMWhPbXh2WTJGMGFXOXVJanA3SWtCMGVYQmxJam9pSUZCdmMzUmhiRUZrWkhKbGMzTWlMQ0p6WTJobGJXRTZZV1JrY21WemMwTnZkVzUwY25raU9pSkZlR0Z0Y0d4bElFTnZkVzUwY25raUxDSnpZMmhsYldFNllXUmtjbVZ6YzFKbFoybHZiaUk2SWtWNFlXMXdiR1VnVW1WbmFXOXVJaXdpYzJOb1pXMWhPbUZrWkhKbGMzTk1iMk5oYkdsMGVTSTZJa1Y0WVcxd2JHVWdRMmwwZVNJc0luTmphR1Z0WVRwd2IzTjBZV3hEYjJSbElqb2lNVEl6TkRVaUxDSnpZMmhsYldFNmMzUnlaV1YwUVdSa2NtVnpjeUk2SWpFZ1JYaGhiWEJzWlNCVGRISmxaWFFpZlgxOWZRLlpIcGJmQjdIUlhXZGEwV19mOGYwX1pvOUdKMlUxUXNrME9mVk1uLWJPaWJHNnR5dEotbVhQazhaeWwzRXZScHVBUGFWUWxnT1J0RVRwdFF1UVlXUUR3Il0sImlkIjoiaHR0cHM6Ly9iYXIuZXhhbXBsZS5jb20vdmVyaWZpYWJsZS1wcmVzZW50YXRpb24uanNvbmxkIn19.HBDsrOtJ2n3XU7JgfwXX1JyDpLApHssN4EKaM5ggrOqYSNw09C3BnS78ztwTJNmHQVKEyEOBdZlp6mziT4LQBw
+```
+
+Example of the decoded JWT Header:
+
+```json
+{
+  "alg": "EdDSA",
+  "kid": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+  "typ": "'vp+ld+jwt'"
+}
+```
+
+Example of decoded JWT Payload:
+
+```json
+{
+  "sub": "did:example:123",
+  "iss": "did:example:123",
+  "nbf": 1707413926,
+  "iat": 1707413926,
+  "exp": 1865266726,
+  "vp": {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1"
+    ],
+    "holder": "did:example:123",
+    "type": [
+      "VerifiablePresentation"
+    ],
+    "verifiableCredential": [
+      "eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDpleGFtcGxlOjEyMyNfUXEwVUwyRnE2NTFRMEZqZDZUdm5ZRS1mYUhpT3BSbFBWUWNZXy10QTRBIiwidHlwIjoiJ3ZjK2xkK2p3dCcifQ.eyJzdWIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3MiOiJkaWQ6ZXhhbXBsZToxMjMiLCJuYmYiOjE3MDc0MTM5MjYsImlhdCI6MTcwNzQxMzkyNiwiZXhwIjoxODY1MjY2NzI2LCJ2YyI6eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSIseyJzY2hlbWEiOiJodHRwczovL3NjaGVtYS5vcmcvIn1dLCJpc3N1ZXIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3N1YW5jZURhdGUiOiIyMDI0LTAyLTA4VDE4OjM4OjQ2KzAxOjAwIiwiZXhwaXJhdGlvbkRhdGUiOiIyMDI5LTAyLTA4VDE4OjM4OjQ2KzAxOjAwIiwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCIsInNjaGVtYTpPcmdhbml6YXRpb24iXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiaWQiOiJkaWQ6ZXhhbXBsZToxMjMiLCJzY2hlbWE6bGVnYWxOYW1lIjoiRXhhbXBsZSBMTEMiLCJzY2hlbWE6dGVsZXBob25lIjoiKzEgMjM0NTYgNzg5Iiwic2NoZW1hOnRheElEIjoiMTIzNDU2Nzg5Iiwic2NoZW1hOmxvY2F0aW9uIjp7IkB0eXBlIjoiIFBvc3RhbEFkZHJlc3MiLCJzY2hlbWE6YWRkcmVzc0NvdW50cnkiOiJFeGFtcGxlIENvdW50cnkiLCJzY2hlbWE6YWRkcmVzc1JlZ2lvbiI6IkV4YW1wbGUgUmVnaW9uIiwic2NoZW1hOmFkZHJlc3NMb2NhbGl0eSI6IkV4YW1wbGUgQ2l0eSIsInNjaGVtYTpwb3N0YWxDb2RlIjoiMTIzNDUiLCJzY2hlbWE6c3RyZWV0QWRkcmVzcyI6IjEgRXhhbXBsZSBTdHJlZXQifX19fQ.ZHpbfB7HRXWda0W_f8f0_Zo9GJ2U1Qsk0OfVMn-bOibG6tytJ-mXPk8Zyl3EvRpuAPaVQlgORtETptQuQYWQDw"
+    ],
+    "id": "https://bar.example.com/verifiable-presentation.jsonld"
+  }
+}
+```
+
+Example of decoded VC JWT Header:
+
+```json
+{
+  "alg": "EdDSA",
+  "kid": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+  "typ": "'vc+ld+jwt'"
+}
+```
+
+Example of decoded VC JWT Payload:
+
+```json
+{
+  "sub": "did:example:123",
+  "iss": "did:example:123",
+  "nbf": 1707413926,
+  "iat": 1707413926,
+  "exp": 1865266726,
+  "vc": {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      {
+        "schema": "https://schema.org/"
+      }
+    ],
+    "issuer": "did:example:123",
+    "issuanceDate": "2024-02-08T18:38:46+01:00",
+    "expirationDate": "2029-02-08T18:38:46+01:00",
+    "type": [
+      "VerifiableCredential",
+      "schema:Organization"
+    ],
+    "credentialSubject": {
+      "id": "did:example:123",
+      "schema:legalName": "Example LLC",
+      "schema:telephone": "+1 23456 789",
+      "schema:taxID": "123456789",
+      "schema:location": {
+        "@type": " PostalAddress",
+        "schema:addressCountry": "Example Country",
+        "schema:addressRegion": "Example Region",
+        "schema:addressLocality": "Example City",
+        "schema:postalCode": "12345",
+        "schema:streetAddress": "1 Example Street"
+      }
+    }
+  }
 }
 ```
 

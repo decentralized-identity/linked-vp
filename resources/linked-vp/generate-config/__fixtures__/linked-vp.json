@@ -1,0 +1,58 @@
+{
+  "linked_ld_vp": {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1"
+    ],
+    "holder": "did:example:123",
+    "type": [
+      "VerifiablePresentation"
+    ],
+    "verifiableCredential": [
+      {
+        "@context": [
+          "https://www.w3.org/2018/credentials/v1",
+          {
+            "schema": "https://schema.org/"
+          }
+        ],
+        "issuer": "did:example:123",
+        "issuanceDate": "2024-02-08T18:38:46+01:00",
+        "expirationDate": "2029-02-08T18:38:46+01:00",
+        "type": [
+          "VerifiableCredential",
+          "schema:Organization"
+        ],
+        "credentialSubject": {
+          "id": "did:example:123",
+          "schema:legalName": "Example LLC",
+          "schema:telephone": "+1 23456 789",
+          "schema:taxID": "123456789",
+          "schema:location": {
+            "@type": " PostalAddress",
+            "schema:addressCountry": "Example Country",
+            "schema:addressRegion": "Example Region",
+            "schema:addressLocality": "Example City",
+            "schema:postalCode": "12345",
+            "schema:streetAddress": "1 Example Street"
+          }
+        },
+        "proof": {
+          "type": "Ed25519Signature2018",
+          "created": "2024-02-08T17:38:46Z",
+          "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+          "proofPurpose": "assertionMethod",
+          "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..qD1a-op-GWkvzI5LaAXqJhJv-9WCSTgtEUzUvDeuiaUSDWpVUh14x5TUbGNvmx1xZ0fEf5eWZWoJ-2dogDpmBQ"
+        }
+      }
+    ],
+    "id": "https://bar.example.com/verifiable-presentation.jsonld",
+    "proof": {
+      "type": "Ed25519Signature2018",
+      "created": "2024-02-08T17:38:46Z",
+      "verificationMethod": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+      "proofPurpose": "assertionMethod",
+      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..6_k6Dbgug-XvksZvDVi9UxUTAmQ0J76pjdrQyNaQL7eVMmP_SUPZCqso6EN3aEKFSsJrjDJoPJa9rBK99mXvDw"
+    }
+  },
+  "linked_jwt_vp": "eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDpleGFtcGxlOjEyMyNfUXEwVUwyRnE2NTFRMEZqZDZUdm5ZRS1mYUhpT3BSbFBWUWNZXy10QTRBIiwidHlwIjoiJ3ZwK2xkK2p3dCcifQ.eyJzdWIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3MiOiJkaWQ6ZXhhbXBsZToxMjMiLCJuYmYiOjE3MDc0MTM5MjYsImlhdCI6MTcwNzQxMzkyNiwiZXhwIjoxODY1MjY2NzI2LCJ2cCI6eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSJdLCJob2xkZXIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJ0eXBlIjpbIlZlcmlmaWFibGVQcmVzZW50YXRpb24iXSwidmVyaWZpYWJsZUNyZWRlbnRpYWwiOlsiZXlKaGJHY2lPaUpGWkVSVFFTSXNJbXRwWkNJNkltUnBaRHBsZUdGdGNHeGxPakV5TXlOZlVYRXdWVXd5Um5FMk5URlJNRVpxWkRaVWRtNVpSUzFtWVVocFQzQlNiRkJXVVdOWlh5MTBRVFJCSWl3aWRIbHdJam9pSjNaaksyeGtLMnAzZENjaWZRLmV5SnpkV0lpT2lKa2FXUTZaWGhoYlhCc1pUb3hNak1pTENKcGMzTWlPaUprYVdRNlpYaGhiWEJzWlRveE1qTWlMQ0p1WW1ZaU9qRTNNRGMwTVRNNU1qWXNJbWxoZENJNk1UY3dOelF4TXpreU5pd2laWGh3SWpveE9EWTFNalkyTnpJMkxDSjJZeUk2ZXlKQVkyOXVkR1Y0ZENJNld5Sm9kSFJ3Y3pvdkwzZDNkeTUzTXk1dmNtY3ZNakF4T0M5amNtVmtaVzUwYVdGc2N5OTJNU0lzZXlKelkyaGxiV0VpT2lKb2RIUndjem92TDNOamFHVnRZUzV2Y21jdkluMWRMQ0pwYzNOMVpYSWlPaUprYVdRNlpYaGhiWEJzWlRveE1qTWlMQ0pwYzNOMVlXNWpaVVJoZEdVaU9pSXlNREkwTFRBeUxUQTRWREU0T2pNNE9qUTJLekF4T2pBd0lpd2laWGh3YVhKaGRHbHZia1JoZEdVaU9pSXlNREk1TFRBeUxUQTRWREU0T2pNNE9qUTJLekF4T2pBd0lpd2lkSGx3WlNJNld5SldaWEpwWm1saFlteGxRM0psWkdWdWRHbGhiQ0lzSW5OamFHVnRZVHBQY21kaGJtbDZZWFJwYjI0aVhTd2lZM0psWkdWdWRHbGhiRk4xWW1wbFkzUWlPbnNpYVdRaU9pSmthV1E2WlhoaGJYQnNaVG94TWpNaUxDSnpZMmhsYldFNmJHVm5ZV3hPWVcxbElqb2lSWGhoYlhCc1pTQk1URU1pTENKelkyaGxiV0U2ZEdWc1pYQm9iMjVsSWpvaUt6RWdNak0wTlRZZ056ZzVJaXdpYzJOb1pXMWhPblJoZUVsRUlqb2lNVEl6TkRVMk56ZzVJaXdpYzJOb1pXMWhPbXh2WTJGMGFXOXVJanA3SWtCMGVYQmxJam9pSUZCdmMzUmhiRUZrWkhKbGMzTWlMQ0p6WTJobGJXRTZZV1JrY21WemMwTnZkVzUwY25raU9pSkZlR0Z0Y0d4bElFTnZkVzUwY25raUxDSnpZMmhsYldFNllXUmtjbVZ6YzFKbFoybHZiaUk2SWtWNFlXMXdiR1VnVW1WbmFXOXVJaXdpYzJOb1pXMWhPbUZrWkhKbGMzTk1iMk5oYkdsMGVTSTZJa1Y0WVcxd2JHVWdRMmwwZVNJc0luTmphR1Z0WVRwd2IzTjBZV3hEYjJSbElqb2lNVEl6TkRVaUxDSnpZMmhsYldFNmMzUnlaV1YwUVdSa2NtVnpjeUk2SWpFZ1JYaGhiWEJzWlNCVGRISmxaWFFpZlgxOWZRLlpIcGJmQjdIUlhXZGEwV19mOGYwX1pvOUdKMlUxUXNrME9mVk1uLWJPaWJHNnR5dEotbVhQazhaeWwzRXZScHVBUGFWUWxnT1J0RVRwdFF1UVlXUUR3Il0sImlkIjoiaHR0cHM6Ly9iYXIuZXhhbXBsZS5jb20vdmVyaWZpYWJsZS1wcmVzZW50YXRpb24uanNvbmxkIn19.HBDsrOtJ2n3XU7JgfwXX1JyDpLApHssN4EKaM5ggrOqYSNw09C3BnS78ztwTJNmHQVKEyEOBdZlp6mziT4LQBw"
+}
