@@ -47,7 +47,7 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
                     </header>
       
                     <article id="content">
-                      <h1 id="linked-verifiable-presentations"><a class="toc-anchor" href="#linked-verifiable-presentations" >§</a> Linked Verifiable Presentations</h1>
+                      <h1 id="linked-verifiable-presentations-v010"><a class="toc-anchor" href="#linked-verifiable-presentations-v010" >§</a> Linked Verifiable Presentations v0.1.0</h1>
 <p><strong>Specification Status:</strong> <a path-0="github.com"path-1="decentralized-identity"path-2="org"path-3="blob"path-4="master"path-5="work-item-lifecycle.md"href="https://github.com/decentralized-identity/org/blob/master/work-item-lifecycle.md" >Draft</a></p>
 <p><strong>Latest Draft:</strong> <a path-0="identity.foundation"path-1="linked-vp"href="https://identity.foundation/linked-vp" >identity.foundation/linked-vp</a></p>
 <dl>
@@ -62,7 +62,15 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <!-- -->
 <dl>
 <dt><strong>Authors:</strong></dt>
-<dd>Others?</dd>
+<dd>
+<p><a path-0="www.linkedin.com"path-1="in"path-2="brianrichter3"href="https://www.linkedin.com/in/brianrichter3" >Brian Richter</a> (Aviary Tech)</p>
+</dd>
+<dd>
+<p><a path-0="www.linkedin.com"path-1="in"path-2="markus-sabadello-353a0821"href="https://www.linkedin.com/in/markus-sabadello-353a0821" >Markus Sabadello</a> (Danube Tech)</p>
+</dd>
+<dd>
+<p>Others?</p>
+</dd>
 </dl>
 <!-- -->
 <dl>
@@ -155,7 +163,7 @@ section codifies the <code>LinkedVerifiablePresentations</code> service endpoint
 and link verifiable presentations with verifiable credentials that SHALL be publicly associated with the DID.
 Presentations referenced within the <code>LinkedVerifiablePresentations</code> endpoint descriptor can then be crawled by verifying
 parties to locate and verify any presentation resources that may exist.</p>
-<h3 id="linked-verifiable-presentations-2"><a class="toc-anchor" href="#linked-verifiable-presentations-2" >§</a> Linked Verifiable Presentations</h3>
+<h3 id="linked-verifiable-presentations"><a class="toc-anchor" href="#linked-verifiable-presentations" >§</a> Linked Verifiable Presentations</h3>
 <p><code>LinkedVerifiablePresentations</code> endpoint descriptors are JSON objects composed as follows:</p>
 <ul>
 <li>The object MUST contain an <code>id</code> property, and its value MUST be a valid URI conforming to [<a class="spec-reference" href="#ref:RFC3986">RFC3986</a>] as
@@ -168,7 +176,7 @@ contain one or more Uniform Resource Locators as described in [<a class="spec-re
 <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token string">"https://www.w3.org/ns/did/v1"</span><span class="token punctuation">,</span>
-    <span class="token string">"https://identity.foundation/linked-vp/v1"</span>
+    <span class="token string">"https://identity.foundation/contexts/linked-vp/v1"</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
   <span class="token property">"verificationMethod"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
@@ -196,55 +204,139 @@ contain one or more Uniform Resource Locators as described in [<a class="spec-re
 <span class="token punctuation">}</span>
 </code></pre>
 <h3 id="example-linked-verifiable-presentation-resource"><a class="toc-anchor" href="#example-linked-verifiable-presentation-resource" >§</a> Example: Linked Verifiable Presentation Resource</h3>
-<p>Linked verifiable presentation with a credential that describes an organization:</p>
+<p>Linked verifiable presentation with a credential that describes an organization.</p>
+<h4 id="json-ld-format"><a class="toc-anchor" href="#json-ld-format" >§</a> JSON-LD Format</h4>
 <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token string">"https://www.w3.org/2018/credentials/v1"</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"VerifiablePresentation"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token property">"holder"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
-  <span class="token property">"verifiableCredential"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
-    <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token string">"https://www.w3.org/2018/credentials/v1"</span><span class="token punctuation">,</span>
-      <span class="token string">"https://schema.org/"</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"https://bar.example.com/verifiable-presentation.jsonld"</span><span class="token punctuation">,</span>
-    <span class="token property">"issuer"</span><span class="token operator">:</span> <span class="token string">"did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM"</span><span class="token punctuation">,</span>
-    <span class="token property">"issuanceDate"</span><span class="token operator">:</span> <span class="token string">"2020-12-04T14:08:28-06:00"</span><span class="token punctuation">,</span>
-    <span class="token property">"expirationDate"</span><span class="token operator">:</span> <span class="token string">"2025-12-04T14:08:28-06:00"</span><span class="token punctuation">,</span>
-    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token string">"VerifiableCredential"</span><span class="token punctuation">,</span>
-      <span class="token string">"Organization"</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token property">"credentialSubject"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM"</span><span class="token punctuation">,</span>
-      <span class="token property">"legalName"</span><span class="token operator">:</span> <span class="token string">"Example LLC"</span><span class="token punctuation">,</span>
-      <span class="token property">"telephone"</span><span class="token operator">:</span> <span class="token string">"+1 23456 789"</span><span class="token punctuation">,</span>
-      <span class="token property">"taxID"</span><span class="token operator">:</span> <span class="token string">"123456789"</span><span class="token punctuation">,</span>
-      <span class="token property">"location"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token property">"@type"</span><span class="token operator">:</span> <span class="token string">" PostalAddress"</span><span class="token punctuation">,</span>
-        <span class="token property">"addressCountry"</span><span class="token operator">:</span> <span class="token string">"Example Country"</span><span class="token punctuation">,</span>
-        <span class="token property">"addressRegion"</span><span class="token operator">:</span> <span class="token string">"Example Region"</span><span class="token punctuation">,</span>
-        <span class="token property">"addressLocality"</span><span class="token operator">:</span> <span class="token string">"Example City"</span><span class="token punctuation">,</span>
-        <span class="token property">"postalCode"</span><span class="token operator">:</span> <span class="token string">"12345"</span><span class="token punctuation">,</span>
-        <span class="token property">"streetAddress"</span><span class="token operator">:</span> <span class="token string">"1 Example Street"</span>
+  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"VerifiablePresentation"</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"verifiableCredential"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"https://www.w3.org/2018/credentials/v1"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">"schema"</span><span class="token operator">:</span> <span class="token string">"https://schema.org/"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">"issuer"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+      <span class="token property">"issuanceDate"</span><span class="token operator">:</span> <span class="token string">"2024-02-08T18:38:46+01:00"</span><span class="token punctuation">,</span>
+      <span class="token property">"expirationDate"</span><span class="token operator">:</span> <span class="token string">"2029-02-08T18:38:46+01:00"</span><span class="token punctuation">,</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"VerifiableCredential"</span><span class="token punctuation">,</span>
+        <span class="token string">"schema:Organization"</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">"credentialSubject"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+        <span class="token property">"schema:legalName"</span><span class="token operator">:</span> <span class="token string">"Example LLC"</span><span class="token punctuation">,</span>
+        <span class="token property">"schema:telephone"</span><span class="token operator">:</span> <span class="token string">"+1 23456 789"</span><span class="token punctuation">,</span>
+        <span class="token property">"schema:taxID"</span><span class="token operator">:</span> <span class="token string">"123456789"</span><span class="token punctuation">,</span>
+        <span class="token property">"schema:location"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">"@type"</span><span class="token operator">:</span> <span class="token string">" PostalAddress"</span><span class="token punctuation">,</span>
+          <span class="token property">"schema:addressCountry"</span><span class="token operator">:</span> <span class="token string">"Example Country"</span><span class="token punctuation">,</span>
+          <span class="token property">"schema:addressRegion"</span><span class="token operator">:</span> <span class="token string">"Example Region"</span><span class="token punctuation">,</span>
+          <span class="token property">"schema:addressLocality"</span><span class="token operator">:</span> <span class="token string">"Example City"</span><span class="token punctuation">,</span>
+          <span class="token property">"schema:postalCode"</span><span class="token operator">:</span> <span class="token string">"12345"</span><span class="token punctuation">,</span>
+          <span class="token property">"schema:streetAddress"</span><span class="token operator">:</span> <span class="token string">"1 Example Street"</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"proof"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"Ed25519Signature2018"</span><span class="token punctuation">,</span>
+        <span class="token property">"created"</span><span class="token operator">:</span> <span class="token string">"2024-02-08T17:38:46Z"</span><span class="token punctuation">,</span>
+        <span class="token property">"verificationMethod"</span><span class="token operator">:</span> <span class="token string">"did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"</span><span class="token punctuation">,</span>
+        <span class="token property">"proofPurpose"</span><span class="token operator">:</span> <span class="token string">"assertionMethod"</span><span class="token punctuation">,</span>
+        <span class="token property">"jws"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..qD1a-op-GWkvzI5LaAXqJhJv-9WCSTgtEUzUvDeuiaUSDWpVUh14x5TUbGNvmx1xZ0fEf5eWZWoJ-2dogDpmBQ"</span>
       <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token property">"proof"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"Ed25519Signature2018"</span><span class="token punctuation">,</span>
-      <span class="token property">"created"</span><span class="token operator">:</span> <span class="token string">"2020-12-04T20:08:28.540Z"</span><span class="token punctuation">,</span>
-      <span class="token property">"jws"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..D0eDhglCMEjxDV9f_SNxsuU-r3ZB9GR4vaM9TYbyV7yzs1WfdUyYO8rFZdedHbwQafYy8YOpJ1iJlkSmB4JaDQ"</span><span class="token punctuation">,</span>
-      <span class="token property">"proofPurpose"</span><span class="token operator">:</span> <span class="token string">"assertionMethod"</span><span class="token punctuation">,</span>
-      <span class="token property">"verificationMethod"</span><span class="token operator">:</span> <span class="token string">"did:key:z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM#z6MkoTHsgNNrby8JzCNQ1iRLyW5QQ6R8Xuu6AA8igGrMVPUM"</span>
     <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token property">"proof"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
-    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"Ed25519Signature2020"</span><span class="token punctuation">,</span>
-    <span class="token property">"created"</span><span class="token operator">:</span> <span class="token string">"2023-12-01T08:19:39Z"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"https://bar.example.com/verifiable-presentation.jsonld"</span><span class="token punctuation">,</span>
+  <span class="token property">"proof"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"Ed25519Signature2018"</span><span class="token punctuation">,</span>
+    <span class="token property">"created"</span><span class="token operator">:</span> <span class="token string">"2024-02-08T17:38:46Z"</span><span class="token punctuation">,</span>
     <span class="token property">"verificationMethod"</span><span class="token operator">:</span> <span class="token string">"did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"</span><span class="token punctuation">,</span>
     <span class="token property">"proofPurpose"</span><span class="token operator">:</span> <span class="token string">"assertionMethod"</span><span class="token punctuation">,</span>
-    <span class="token property">"proofValue"</span><span class="token operator">:</span> <span class="token string">"z58DAdFfa9SkqZMVPxAQpic7ndSayn1PzZs6ZjWp1CktyGesjuTSwRdoWhAfGFCF5bppETSTojQCrfFPP2oumHKtz"</span>
-  <span class="token punctuation">}</span><span class="token punctuation">]</span>
+    <span class="token property">"jws"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..6_k6Dbgug-XvksZvDVi9UxUTAmQ0J76pjdrQyNaQL7eVMmP_SUPZCqso6EN3aEKFSsJrjDJoPJa9rBK99mXvDw"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="json-web-token-format"><a class="toc-anchor" href="#json-web-token-format" >§</a> JSON Web Token Format</h4>
+<pre><code>eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDpleGFtcGxlOjEyMyNfUXEwVUwyRnE2NTFRMEZqZDZUdm5ZRS1mYUhpT3BSbFBWUWNZXy10QTRBIiwidHlwIjoiJ3ZwK2xkK2p3dCcifQ.eyJzdWIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3MiOiJkaWQ6ZXhhbXBsZToxMjMiLCJuYmYiOjE3MDc0MTM5MjYsImlhdCI6MTcwNzQxMzkyNiwiZXhwIjoxODY1MjY2NzI2LCJ2cCI6eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSJdLCJob2xkZXIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJ0eXBlIjpbIlZlcmlmaWFibGVQcmVzZW50YXRpb24iXSwidmVyaWZpYWJsZUNyZWRlbnRpYWwiOlsiZXlKaGJHY2lPaUpGWkVSVFFTSXNJbXRwWkNJNkltUnBaRHBsZUdGdGNHeGxPakV5TXlOZlVYRXdWVXd5Um5FMk5URlJNRVpxWkRaVWRtNVpSUzFtWVVocFQzQlNiRkJXVVdOWlh5MTBRVFJCSWl3aWRIbHdJam9pSjNaaksyeGtLMnAzZENjaWZRLmV5SnpkV0lpT2lKa2FXUTZaWGhoYlhCc1pUb3hNak1pTENKcGMzTWlPaUprYVdRNlpYaGhiWEJzWlRveE1qTWlMQ0p1WW1ZaU9qRTNNRGMwTVRNNU1qWXNJbWxoZENJNk1UY3dOelF4TXpreU5pd2laWGh3SWpveE9EWTFNalkyTnpJMkxDSjJZeUk2ZXlKQVkyOXVkR1Y0ZENJNld5Sm9kSFJ3Y3pvdkwzZDNkeTUzTXk1dmNtY3ZNakF4T0M5amNtVmtaVzUwYVdGc2N5OTJNU0lzZXlKelkyaGxiV0VpT2lKb2RIUndjem92TDNOamFHVnRZUzV2Y21jdkluMWRMQ0pwYzNOMVpYSWlPaUprYVdRNlpYaGhiWEJzWlRveE1qTWlMQ0pwYzNOMVlXNWpaVVJoZEdVaU9pSXlNREkwTFRBeUxUQTRWREU0T2pNNE9qUTJLekF4T2pBd0lpd2laWGh3YVhKaGRHbHZia1JoZEdVaU9pSXlNREk1TFRBeUxUQTRWREU0T2pNNE9qUTJLekF4T2pBd0lpd2lkSGx3WlNJNld5SldaWEpwWm1saFlteGxRM0psWkdWdWRHbGhiQ0lzSW5OamFHVnRZVHBQY21kaGJtbDZZWFJwYjI0aVhTd2lZM0psWkdWdWRHbGhiRk4xWW1wbFkzUWlPbnNpYVdRaU9pSmthV1E2WlhoaGJYQnNaVG94TWpNaUxDSnpZMmhsYldFNmJHVm5ZV3hPWVcxbElqb2lSWGhoYlhCc1pTQk1URU1pTENKelkyaGxiV0U2ZEdWc1pYQm9iMjVsSWpvaUt6RWdNak0wTlRZZ056ZzVJaXdpYzJOb1pXMWhPblJoZUVsRUlqb2lNVEl6TkRVMk56ZzVJaXdpYzJOb1pXMWhPbXh2WTJGMGFXOXVJanA3SWtCMGVYQmxJam9pSUZCdmMzUmhiRUZrWkhKbGMzTWlMQ0p6WTJobGJXRTZZV1JrY21WemMwTnZkVzUwY25raU9pSkZlR0Z0Y0d4bElFTnZkVzUwY25raUxDSnpZMmhsYldFNllXUmtjbVZ6YzFKbFoybHZiaUk2SWtWNFlXMXdiR1VnVW1WbmFXOXVJaXdpYzJOb1pXMWhPbUZrWkhKbGMzTk1iMk5oYkdsMGVTSTZJa1Y0WVcxd2JHVWdRMmwwZVNJc0luTmphR1Z0WVRwd2IzTjBZV3hEYjJSbElqb2lNVEl6TkRVaUxDSnpZMmhsYldFNmMzUnlaV1YwUVdSa2NtVnpjeUk2SWpFZ1JYaGhiWEJzWlNCVGRISmxaWFFpZlgxOWZRLlpIcGJmQjdIUlhXZGEwV19mOGYwX1pvOUdKMlUxUXNrME9mVk1uLWJPaWJHNnR5dEotbVhQazhaeWwzRXZScHVBUGFWUWxnT1J0RVRwdFF1UVlXUUR3Il0sImlkIjoiaHR0cHM6Ly9iYXIuZXhhbXBsZS5jb20vdmVyaWZpYWJsZS1wcmVzZW50YXRpb24uanNvbmxkIn19.HBDsrOtJ2n3XU7JgfwXX1JyDpLApHssN4EKaM5ggrOqYSNw09C3BnS78ztwTJNmHQVKEyEOBdZlp6mziT4LQBw
+</code></pre>
+<p>Example of the decoded JWT Header:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"alg"</span><span class="token operator">:</span> <span class="token string">"EdDSA"</span><span class="token punctuation">,</span>
+  <span class="token property">"kid"</span><span class="token operator">:</span> <span class="token string">"did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"</span><span class="token punctuation">,</span>
+  <span class="token property">"typ"</span><span class="token operator">:</span> <span class="token string">"'vp+ld+jwt'"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Example of decoded JWT Payload:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"sub"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+  <span class="token property">"iss"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+  <span class="token property">"nbf"</span><span class="token operator">:</span> <span class="token number">1707413926</span><span class="token punctuation">,</span>
+  <span class="token property">"iat"</span><span class="token operator">:</span> <span class="token number">1707413926</span><span class="token punctuation">,</span>
+  <span class="token property">"exp"</span><span class="token operator">:</span> <span class="token number">1865266726</span><span class="token punctuation">,</span>
+  <span class="token property">"vp"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"https://www.w3.org/2018/credentials/v1"</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"holder"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"VerifiablePresentation"</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"verifiableCredential"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDpleGFtcGxlOjEyMyNfUXEwVUwyRnE2NTFRMEZqZDZUdm5ZRS1mYUhpT3BSbFBWUWNZXy10QTRBIiwidHlwIjoiJ3ZjK2xkK2p3dCcifQ.eyJzdWIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3MiOiJkaWQ6ZXhhbXBsZToxMjMiLCJuYmYiOjE3MDc0MTM5MjYsImlhdCI6MTcwNzQxMzkyNiwiZXhwIjoxODY1MjY2NzI2LCJ2YyI6eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSIseyJzY2hlbWEiOiJodHRwczovL3NjaGVtYS5vcmcvIn1dLCJpc3N1ZXIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3N1YW5jZURhdGUiOiIyMDI0LTAyLTA4VDE4OjM4OjQ2KzAxOjAwIiwiZXhwaXJhdGlvbkRhdGUiOiIyMDI5LTAyLTA4VDE4OjM4OjQ2KzAxOjAwIiwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCIsInNjaGVtYTpPcmdhbml6YXRpb24iXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiaWQiOiJkaWQ6ZXhhbXBsZToxMjMiLCJzY2hlbWE6bGVnYWxOYW1lIjoiRXhhbXBsZSBMTEMiLCJzY2hlbWE6dGVsZXBob25lIjoiKzEgMjM0NTYgNzg5Iiwic2NoZW1hOnRheElEIjoiMTIzNDU2Nzg5Iiwic2NoZW1hOmxvY2F0aW9uIjp7IkB0eXBlIjoiIFBvc3RhbEFkZHJlc3MiLCJzY2hlbWE6YWRkcmVzc0NvdW50cnkiOiJFeGFtcGxlIENvdW50cnkiLCJzY2hlbWE6YWRkcmVzc1JlZ2lvbiI6IkV4YW1wbGUgUmVnaW9uIiwic2NoZW1hOmFkZHJlc3NMb2NhbGl0eSI6IkV4YW1wbGUgQ2l0eSIsInNjaGVtYTpwb3N0YWxDb2RlIjoiMTIzNDUiLCJzY2hlbWE6c3RyZWV0QWRkcmVzcyI6IjEgRXhhbXBsZSBTdHJlZXQifX19fQ.ZHpbfB7HRXWda0W_f8f0_Zo9GJ2U1Qsk0OfVMn-bOibG6tytJ-mXPk8Zyl3EvRpuAPaVQlgORtETptQuQYWQDw"</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"https://bar.example.com/verifiable-presentation.jsonld"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Example of decoded VC JWT Header:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"alg"</span><span class="token operator">:</span> <span class="token string">"EdDSA"</span><span class="token punctuation">,</span>
+  <span class="token property">"kid"</span><span class="token operator">:</span> <span class="token string">"did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"</span><span class="token punctuation">,</span>
+  <span class="token property">"typ"</span><span class="token operator">:</span> <span class="token string">"'vc+ld+jwt'"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Example of decoded VC JWT Payload:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"sub"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+  <span class="token property">"iss"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+  <span class="token property">"nbf"</span><span class="token operator">:</span> <span class="token number">1707413926</span><span class="token punctuation">,</span>
+  <span class="token property">"iat"</span><span class="token operator">:</span> <span class="token number">1707413926</span><span class="token punctuation">,</span>
+  <span class="token property">"exp"</span><span class="token operator">:</span> <span class="token number">1865266726</span><span class="token punctuation">,</span>
+  <span class="token property">"vc"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"https://www.w3.org/2018/credentials/v1"</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">"schema"</span><span class="token operator">:</span> <span class="token string">"https://schema.org/"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"issuer"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+    <span class="token property">"issuanceDate"</span><span class="token operator">:</span> <span class="token string">"2024-02-08T18:38:46+01:00"</span><span class="token punctuation">,</span>
+    <span class="token property">"expirationDate"</span><span class="token operator">:</span> <span class="token string">"2029-02-08T18:38:46+01:00"</span><span class="token punctuation">,</span>
+    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"VerifiableCredential"</span><span class="token punctuation">,</span>
+      <span class="token string">"schema:Organization"</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"credentialSubject"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+      <span class="token property">"schema:legalName"</span><span class="token operator">:</span> <span class="token string">"Example LLC"</span><span class="token punctuation">,</span>
+      <span class="token property">"schema:telephone"</span><span class="token operator">:</span> <span class="token string">"+1 23456 789"</span><span class="token punctuation">,</span>
+      <span class="token property">"schema:taxID"</span><span class="token operator">:</span> <span class="token string">"123456789"</span><span class="token punctuation">,</span>
+      <span class="token property">"schema:location"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"@type"</span><span class="token operator">:</span> <span class="token string">" PostalAddress"</span><span class="token punctuation">,</span>
+        <span class="token property">"schema:addressCountry"</span><span class="token operator">:</span> <span class="token string">"Example Country"</span><span class="token punctuation">,</span>
+        <span class="token property">"schema:addressRegion"</span><span class="token operator">:</span> <span class="token string">"Example Region"</span><span class="token punctuation">,</span>
+        <span class="token property">"schema:addressLocality"</span><span class="token operator">:</span> <span class="token string">"Example City"</span><span class="token punctuation">,</span>
+        <span class="token property">"schema:postalCode"</span><span class="token operator">:</span> <span class="token string">"12345"</span><span class="token punctuation">,</span>
+        <span class="token property">"schema:streetAddress"</span><span class="token operator">:</span> <span class="token string">"1 Example Street"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="privacy-considerations"><a class="toc-anchor" href="#privacy-considerations" >§</a> Privacy Considerations</h2>
@@ -442,9 +534,14 @@ MUST comply with relevant normative statements in that section.</p>
 <li><a href="#terminology" >Terminology</a></li>
 <li><a href="#linked-verifiable-presentation-service-endpoint" >Linked Verifiable Presentation Service Endpoint</a>
 <ul>
-<li><a href="#linked-verifiable-presentations-2" >Linked Verifiable Presentations</a></li>
+<li><a href="#linked-verifiable-presentations" >Linked Verifiable Presentations</a></li>
 <li><a href="#example-did-document-with-linkedverifiablepresentations-service-endpoints" >Example: DID Document with LinkedVerifiablePresentations Service Endpoints</a></li>
-<li><a href="#example-linked-verifiable-presentation-resource" >Example: Linked Verifiable Presentation Resource</a></li>
+<li><a href="#example-linked-verifiable-presentation-resource" >Example: Linked Verifiable Presentation Resource</a>
+<ul>
+<li><a href="#json-ld-format" >JSON-LD Format</a></li>
+<li><a href="#json-web-token-format" >JSON Web Token Format</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#privacy-considerations" >Privacy Considerations</a>
