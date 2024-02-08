@@ -1,6 +1,6 @@
 # Linked Verifiable Presentations Context
 
-- [Latest JSON-LD Context](./linked-vp-v1.jsonld)
+- [Latest JSON-LD Context](./v1/index.json)
 
 ### Terminology
 

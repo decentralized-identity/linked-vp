@@ -1,12 +1,12 @@
 const {
   documentLoaderFactory,
   contexts,
-} = require('@transmute/jsonld-document-loader');
-const sec = require('@transmute/security-context');
-const { driver } = require('@transmute/did-key-ed25519');
+} = require("@transmute/jsonld-document-loader");
+const sec = require("@transmute/security-context");
+const { driver } = require("@transmute/did-key-ed25519");
 
-const context = require('../../../../linked-vp/v1/index.json');
-const contextSchemaorg = require('../__fixtures__/schemaorg-all-https.json');
+const context = require("../../../../contexts/v1/index.json");
+const contextSchemaorg = require("../__fixtures__/schemaorg-all-https.json");
 
 const documentLoader = documentLoaderFactory.pluginFactory
   .build({
@@ -20,16 +20,16 @@ const documentLoader = documentLoaderFactory.pluginFactory
     [sec.constants.ED25519_2018_v1_URL]: sec.contexts.get(sec.constants.ED25519_2018_v1_URL),
   })
   .addContext({
-    'https://schema.org/': contextSchemaorg,
+    "https://schema.org/": contextSchemaorg,
   })
   .addContext({
-    'https://identity.foundation/contexts/linked-vp/v1': context,
+    "https://identity.foundation/linked-vp/contexts/v1": context,
   })
   .addResolver({
-    'did:key:z6': {
+    "did:key:z6": {
       resolve: async (uri) => {
         const { didDocument } = await driver.resolve(uri, {
-          accept: 'application/did+ld+json',
+          accept: "application/did+ld+json",
         });
         return didDocument;
       },
