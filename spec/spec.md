@@ -88,22 +88,22 @@ This section defines terms used in this specification.
 
 To enable the public discovery of verifiable presentations and verifiable credentials for a DID, there must exist a DID
 Document mechanism for expressing locations where verifiable presentations MAY be located. To that end, the following
-section codifies the `LinkedVerifiablePresentations` service endpoint. The endpoint allows a DID controller to publish
+section codifies the `LinkedVerifiablePresentation` service endpoint. The endpoint allows a DID controller to publish
 and link verifiable presentations with verifiable credentials that SHALL be publicly associated with the DID.
-Presentations referenced within the `LinkedVerifiablePresentations` endpoint descriptor can then be crawled by verifying
+Presentations referenced within the `LinkedVerifiablePresentation` endpoint descriptor can then be crawled by verifying
 parties to locate and verify any presentation resources that may exist.
 
 ### Linked Verifiable Presentations
 
-`LinkedVerifiablePresentations` endpoint descriptors are JSON objects composed as follows:
+`LinkedVerifiablePresentation` endpoint descriptors are JSON objects composed as follows:
 
 - The object MUST contain an `id` property, and its value MUST be a valid URI conforming to [[spec:RFC3986]] as
   described in [[spec:DID-CORE]].
-- The object MUST contain a `type` property, and its value MUST be the string "LinkedVerifiablePresentations".
+- The object MUST contain a `type` property, and its value MUST be the string "LinkedVerifiablePresentation".
 - The object MUST contain a `serviceEndpoint` property, and its value MUST be either a string or an array which MUST
   contain one or more Uniform Resource Locators as described in [[spec:RFC3986]].
 
-### Example: DID Document with LinkedVerifiablePresentations Service Endpoints
+### Example: DID Document with LinkedVerifiablePresentation Service Endpoints
 
 ```json
 {
@@ -125,12 +125,12 @@ parties to locate and verify any presentation resources that may exist.
   "service": [
     {
       "id": "did:example:123#foo",
-      "type": "LinkedVerifiablePresentations",
+      "type": "LinkedVerifiablePresentation",
       "serviceEndpoint": ["https://bar.example.com/verifiable-presentation.jsonld"]
     },
     {
       "id": "did:example:123#baz",
-      "type": "LinkedVerifiablePresentations",
+      "type": "LinkedVerifiablePresentation",
       "serviceEndpoint": "ipfs://bafybeihkoviema7g3gxyt6la7vd5ho32ictqbilu3wnlo3rs7ewhnp7lly/verifiable-presentation.jwt"
     }
   ]
