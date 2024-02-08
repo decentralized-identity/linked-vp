@@ -4,6 +4,6 @@
 
 ### Terminology
 
-<h4 id="LinkedVerifiablePresentations"><a href="#LinkedVerifiablePresentations">LinkedVerifiablePresentations</a></h4>
+<h4 id="LinkedVerifiablePresentation"><a href="#LinkedVerifiablePresentation">LinkedVerifiablePresentation</a></h4>
 
 A service entrypoint object with fields for linked verifiable presentations.
