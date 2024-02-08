@@ -1,4 +1,4 @@
-# Linked Verifiable Presentation v0.1.0
+# Linked Verifiable Presentation v0.2.0
 
 **Specification Status:** [Draft](https://github.com/decentralized-identity/org/blob/master/work-item-lifecycle.md)
 

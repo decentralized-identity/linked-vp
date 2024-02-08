@@ -1,6 +1,6 @@
 {
   "name": "linked-vp",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Linked Verifiable Presentation Specification",
   "repository": {
     "type": "git",
