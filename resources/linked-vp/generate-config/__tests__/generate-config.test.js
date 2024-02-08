@@ -64,6 +64,9 @@ it("can issue / verify linked data", async () => {
     type: ["VerifiableCredential", "schema:Organization"],
     proof: { type: "Ed25519Signature2018" },
   });
+  const h = Buffer.from(JSON.stringify({ "alg": "EdDSA", "b64": false, "crit": ["b64"] })).toString("base64url");
+  let p = Buffer.from(verifiableCredential.proof.jws).toString("base64url");
+  verifiableCredential.proof.jws = `${h}..${p}`;
 
   const presentationTemplate = {
     "@context": [
@@ -94,6 +97,8 @@ it("can issue / verify linked data", async () => {
     type: ["VerifiablePresentation"],
     proof: { type: "Ed25519Signature2018" },
   });
+  p = Buffer.from(verifiablePresentation.proof.jws).toString("base64url");
+  verifiablePresentation.proof.jws = `${h}..${p}`;
 });
 
 it("can issue and verify jwt", async () => {
