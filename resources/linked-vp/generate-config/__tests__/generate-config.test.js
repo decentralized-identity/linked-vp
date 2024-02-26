@@ -64,14 +64,12 @@ it("can issue / verify linked data", async () => {
     type: ["VerifiableCredential", "schema:Organization"],
     proof: { type: "Ed25519Signature2018" },
   });
-  const h = Buffer.from(JSON.stringify({ "alg": "EdDSA", "b64": false, "crit": ["b64"] })).toString("base64url");
+  const h = Buffer.from(JSON.stringify({ alg: "EdDSA", b64: false, crit: ["b64"] })).toString("base64url");
   let p = Buffer.from(verifiableCredential.proof.jws).toString("base64url");
   verifiableCredential.proof.jws = `${h}..${p}`;
 
   const presentationTemplate = {
-    "@context": [
-      "https://www.w3.org/2018/credentials/v1",
-    ],
+    "@context": ["https://www.w3.org/2018/credentials/v1"],
     holder: k0.controller,
     type: ["VerifiablePresentation"],
     verifiableCredential: [verifiableCredential],
@@ -80,15 +78,18 @@ it("can issue / verify linked data", async () => {
 
   // INFO: can't use vcjs.ld.createVerifiablePresentation since it
   // doesn't accept a custom proof purpose
-  verifiablePresentation = await ldp.sign({
-    ...presentationTemplate,
-  }, {
-    suite: new Ed25519Signature2018({
-      key,
-    }),
-    documentLoader,
-    purpose: new ldp.purposes.AssertionProofPurpose(),
-  });
+  verifiablePresentation = await ldp.sign(
+    {
+      ...presentationTemplate,
+    },
+    {
+      suite: new Ed25519Signature2018({
+        key,
+      }),
+      documentLoader,
+      purpose: new ldp.purposes.AssertionProofPurpose(),
+    },
+  );
 
   expect(verifiablePresentation).toMatchObject({
     "@context": ["https://www.w3.org/2018/credentials/v1"],
@@ -131,9 +132,7 @@ it("can issue and verify jwt", async () => {
     nbf: issuedDate.unix(),
     iat: issuedDate.unix(),
     exp: expirationDate.unix(),
-    // To be debated whether to use or not use the vp/vc properties as detailed in VC Data Model 2.0 and https://www.w3.org/TR/vc-jose-cose/#jose-header-parameters-and-jwt-claims. See also https://github.com/decentralized-identity/linked-vp/issues/15#issuecomment-1866203513
-    // ...credentialTemplate,
-    vc: credentialTemplate,
+    ...credentialTemplate,
   };
   const headerVC = {
     alg: "EdDSA",
@@ -145,9 +144,7 @@ it("can issue and verify jwt", async () => {
     .sign(await jose.importJWK(k0.privateKeyJwk));
   expect(vcJwt).toBeDefined();
   const presentationTemplate = {
-    "@context": [
-      "https://www.w3.org/2018/credentials/v1",
-    ],
+    "@context": ["https://www.w3.org/2018/credentials/v1"],
     holder: k0.controller,
     type: ["VerifiablePresentation"],
     verifiableCredential: [vcJwt],
@@ -159,9 +156,7 @@ it("can issue and verify jwt", async () => {
     nbf: issuedDate.unix(),
     iat: issuedDate.unix(),
     exp: expirationDate.unix(),
-    // To be debated whether to use or not use the vp/vc properties as detailed in VC Data Model 2.0 and https://www.w3.org/TR/vc-jose-cose/#jose-header-parameters-and-jwt-claims. See also https://github.com/decentralized-identity/linked-vp/issues/15#issuecomment-1866203513
-    // ...presentationTemplate,
-    vp: presentationTemplate,
+    ...presentationTemplate,
   };
   const headerVP = {
     alg: "EdDSA",
