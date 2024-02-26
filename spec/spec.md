@@ -49,17 +49,18 @@ _This section is non-normative._
 
 The contributors to this specification provided the following incomplete list of use cases that appeal to them:
 
-- Public bidirectional linkage between a DNS origin and a DID as defined by
-  [[DID-CONFIGURATION]](#ref:DID-CONFIGURATION).
-- Provide publicly verifiable information about DIDs used by companies to simplify the onboarding process of suppliers
-  and customers. Example credentials:
+- Discover verifiable data about a website by linking a DID to a DNS name, e.g. via
+  [[DID-CONFIGURATION]](#ref:DID-CONFIGURATION), and referencing verifiable presentations and credentials from the DID
+  via this specification.
+- Simplify the onboarding of suppliers and customers by linking relevant and non-sensitive data to the organization's
+  DID. Example credentials:
   - Business registration credential that contains name, address and line of business.
-  - Attestation of compliance with the ISO 27001 standard issued by a certification organization.
-- Verifiable and machine-readable credential of the mandatory imprint page for company websites.
-- Decentralized business network of people who publicly verifiably share their educational background and work
-  experience.
-- Replicate functionality of X.509 certificates that contain information about the issuers and holders with DIDs and
-  Verifiable Credentials.
+  - Attestation of compliance with the ISO 27001 standard.
+- Make mandatory data verifiable: provide imprint pages or terms of use statements as machine-readable, verifiable
+  credentials that are issued by and linked to the organization's DID.
+- Decentralized business network: people share their educational background and work experience as verifiable
+  credentials publicly.
+- Replicate X.509 certificates with DIDs and linked verifiable presentations and credentials.
 
 ## Status of This Document
 
