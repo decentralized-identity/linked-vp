@@ -223,22 +223,20 @@ Example of decoded JWT Payload:
 {
   "sub": "did:example:123",
   "iss": "did:example:123",
-  "nbf": 1707413926,
-  "iat": 1707413926,
-  "exp": 1865266726,
-  "vp": {
-    "@context": [
-      "https://www.w3.org/2018/credentials/v1"
-    ],
-    "holder": "did:example:123",
-    "type": [
-      "VerifiablePresentation"
-    ],
-    "verifiableCredential": [
-      "eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDpleGFtcGxlOjEyMyNfUXEwVUwyRnE2NTFRMEZqZDZUdm5ZRS1mYUhpT3BSbFBWUWNZXy10QTRBIiwidHlwIjoiJ3ZjK2xkK2p3dCcifQ.eyJzdWIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3MiOiJkaWQ6ZXhhbXBsZToxMjMiLCJuYmYiOjE3MDc0MTM5MjYsImlhdCI6MTcwNzQxMzkyNiwiZXhwIjoxODY1MjY2NzI2LCJ2YyI6eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSIseyJzY2hlbWEiOiJodHRwczovL3NjaGVtYS5vcmcvIn1dLCJpc3N1ZXIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3N1YW5jZURhdGUiOiIyMDI0LTAyLTA4VDE4OjM4OjQ2KzAxOjAwIiwiZXhwaXJhdGlvbkRhdGUiOiIyMDI5LTAyLTA4VDE4OjM4OjQ2KzAxOjAwIiwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCIsInNjaGVtYTpPcmdhbml6YXRpb24iXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiaWQiOiJkaWQ6ZXhhbXBsZToxMjMiLCJzY2hlbWE6bGVnYWxOYW1lIjoiRXhhbXBsZSBMTEMiLCJzY2hlbWE6dGVsZXBob25lIjoiKzEgMjM0NTYgNzg5Iiwic2NoZW1hOnRheElEIjoiMTIzNDU2Nzg5Iiwic2NoZW1hOmxvY2F0aW9uIjp7IkB0eXBlIjoiIFBvc3RhbEFkZHJlc3MiLCJzY2hlbWE6YWRkcmVzc0NvdW50cnkiOiJFeGFtcGxlIENvdW50cnkiLCJzY2hlbWE6YWRkcmVzc1JlZ2lvbiI6IkV4YW1wbGUgUmVnaW9uIiwic2NoZW1hOmFkZHJlc3NMb2NhbGl0eSI6IkV4YW1wbGUgQ2l0eSIsInNjaGVtYTpwb3N0YWxDb2RlIjoiMTIzNDUiLCJzY2hlbWE6c3RyZWV0QWRkcmVzcyI6IjEgRXhhbXBsZSBTdHJlZXQifX19fQ.ZHpbfB7HRXWda0W_f8f0_Zo9GJ2U1Qsk0OfVMn-bOibG6tytJ-mXPk8Zyl3EvRpuAPaVQlgORtETptQuQYWQDw"
-    ],
-    "id": "https://bar.example.com/verifiable-presentation.jsonld"
-  }
+  "nbf": 1708934977,
+  "iat": 1708934977,
+  "exp": 1866787777,
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1"
+  ],
+  "holder": "did:example:123",
+  "type": [
+    "VerifiablePresentation"
+  ],
+  "verifiableCredential": [
+    "eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDpleGFtcGxlOjEyMyNfUXEwVUwyRnE2NTFRMEZqZDZUdm5ZRS1mYUhpT3BSbFBWUWNZXy10QTRBIiwidHlwIjoiJ3ZjK2xkK2p3dCcifQ.eyJzdWIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3MiOiJkaWQ6ZXhhbXBsZToxMjMiLCJuYmYiOjE3MDg5MzQ5NzcsImlhdCI6MTcwODkzNDk3NywiZXhwIjoxODY2Nzg3Nzc3LCJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy92MSIseyJzY2hlbWEiOiJodHRwczovL3NjaGVtYS5vcmcvIn1dLCJpc3N1ZXIiOiJkaWQ6ZXhhbXBsZToxMjMiLCJpc3N1YW5jZURhdGUiOiIyMDI0LTAyLTI2VDA5OjA5OjM3KzAxOjAwIiwiZXhwaXJhdGlvbkRhdGUiOiIyMDI5LTAyLTI2VDA5OjA5OjM3KzAxOjAwIiwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCIsInNjaGVtYTpPcmdhbml6YXRpb24iXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiaWQiOiJkaWQ6ZXhhbXBsZToxMjMiLCJzY2hlbWE6bGVnYWxOYW1lIjoiRXhhbXBsZSBMTEMiLCJzY2hlbWE6dGVsZXBob25lIjoiKzEgMjM0NTYgNzg5Iiwic2NoZW1hOnRheElEIjoiMTIzNDU2Nzg5Iiwic2NoZW1hOmxvY2F0aW9uIjp7IkB0eXBlIjoiIFBvc3RhbEFkZHJlc3MiLCJzY2hlbWE6YWRkcmVzc0NvdW50cnkiOiJFeGFtcGxlIENvdW50cnkiLCJzY2hlbWE6YWRkcmVzc1JlZ2lvbiI6IkV4YW1wbGUgUmVnaW9uIiwic2NoZW1hOmFkZHJlc3NMb2NhbGl0eSI6IkV4YW1wbGUgQ2l0eSIsInNjaGVtYTpwb3N0YWxDb2RlIjoiMTIzNDUiLCJzY2hlbWE6c3RyZWV0QWRkcmVzcyI6IjEgRXhhbXBsZSBTdHJlZXQifX19.oQfIE_nJFrircH-KS2cjFYeZ450x0R-OZVudEzVlVl3EE1Y4lxAnbv0P-GPOSn34OeydbtQ6r96G1tDOW0R3Cw"
+  ],
+  "id": "https://bar.example.com/verifiable-presentation.jsonld"
 }
 ```
 
@@ -258,36 +256,34 @@ Example of decoded VC JWT Payload:
 {
   "sub": "did:example:123",
   "iss": "did:example:123",
-  "nbf": 1707413926,
-  "iat": 1707413926,
-  "exp": 1865266726,
-  "vc": {
-    "@context": [
-      "https://www.w3.org/2018/credentials/v1",
-      {
-        "schema": "https://schema.org/"
-      }
-    ],
-    "issuer": "did:example:123",
-    "issuanceDate": "2024-02-08T18:38:46+01:00",
-    "expirationDate": "2029-02-08T18:38:46+01:00",
-    "type": [
-      "VerifiableCredential",
-      "schema:Organization"
-    ],
-    "credentialSubject": {
-      "id": "did:example:123",
-      "schema:legalName": "Example LLC",
-      "schema:telephone": "+1 23456 789",
-      "schema:taxID": "123456789",
-      "schema:location": {
-        "@type": " PostalAddress",
-        "schema:addressCountry": "Example Country",
-        "schema:addressRegion": "Example Region",
-        "schema:addressLocality": "Example City",
-        "schema:postalCode": "12345",
-        "schema:streetAddress": "1 Example Street"
-      }
+  "nbf": 1708934977,
+  "iat": 1708934977,
+  "exp": 1866787777,
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    {
+      "schema": "https://schema.org/"
+    }
+  ],
+  "issuer": "did:example:123",
+  "issuanceDate": "2024-02-26T09:09:37+01:00",
+  "expirationDate": "2029-02-26T09:09:37+01:00",
+  "type": [
+    "VerifiableCredential",
+    "schema:Organization"
+  ],
+  "credentialSubject": {
+    "id": "did:example:123",
+    "schema:legalName": "Example LLC",
+    "schema:telephone": "+1 23456 789",
+    "schema:taxID": "123456789",
+    "schema:location": {
+      "@type": " PostalAddress",
+      "schema:addressCountry": "Example Country",
+      "schema:addressRegion": "Example Region",
+      "schema:addressLocality": "Example City",
+      "schema:postalCode": "12345",
+      "schema:streetAddress": "1 Example Street"
     }
   }
 }
