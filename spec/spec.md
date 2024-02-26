@@ -355,17 +355,24 @@ utilizing the `expires` property that is an optional element of `proof` property
 [[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) for presentations in JSON-LD format. Respectively, the property `exp` can
 be used for presentations in JWT format [[spec-inform:RFC7519]].
 
-### Verification of Linked Presentations
+### Protection of Linked Presentations
 
 _This section is non-normative_
 
 Unlike the interactive exchange of credentials between [holder][holder] and [verifier][verifier], linked verifiable
 presentations are statically linked and published by the [holder][holder]. Any entity that knows the [holder's][holder]
 DID is able to discover, access and verify the linked presentations without interaction between [holder][holder] and
-[verifier][verifier]. This flow requires additional caution from the [holder][holder] to ensure the integrity,
-authenticity and timeliness of linked presentations. The security properties `nonce`, `challenge`, and `domain` that are
-useful for interactive challenge-response protocols as specified by verifiable credential data
-[[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY) can not be used to secure linked presentations.
+[verifier][verifier]. This flow requires additional caution from the [holder][holder] to ensure integrity, authenticity
+and timeliness of linked presentations. The security properties `nonce`, `challenge`, and `domain`, that are useful for
+interactive challenge-response protocols as specified by verifiable credential data
+[[VC-DATA-INTEGRITY]](#ref:VC-DATA-INTEGRITY), can not be used to secure linked presentations. Therefore, it is
+recommended that the [holder][holder] signs every linked presentations cryptographically. In addtion, the use of
+mechanisms for protecting the integrity of the linked presentations' content is recommended, e.g. hashlinks
+[[CRYPTOGRAPHIC-HASHLINKS]](#ref:CRYPTOGRAPHIC-HASHLINKS).
+
+### Verification of Linked Presentations
+
+_This section is non-normative_
 
 Independent of the successful verification of linked presentations, [verifiers][verifier] should note that a linked
 verifiable presentation only proves control over the [holder's][holder] DID at the time of link creation.
@@ -407,6 +414,11 @@ Implementations MUST comply with relevant normative statements in DID Configurat
 ### Informative References
 
 <dl>
+  <dt id="ref:CRYPTOGRAPHIC-HASHLINKS">CRYPTOGRAPHIC-HASHLINKS</dt>
+  <dd>
+    <cite><a href="https://w3c-ccg.github.io/hashlink/">Cryptographic Hyperlinks</a></cite>.
+        M. Sporny;  L. Rosenthal; 2021. <span class="reference-status">Status: Internet-Draft</span>
+  </dd>
   <dt id="ref:DID-CONFIGURATION">DID-CONFIGURATION</dt>
   <dd>
     <cite><a href="https://identity.foundation/.well-known/resources/did-configuration/">Well Known DID Configuration</a></cite>.
