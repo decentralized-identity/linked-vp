@@ -370,6 +370,42 @@ recommended that the [holder][holder] signs every linked presentations cryptogra
 mechanisms for protecting the integrity of the linked presentations' content is recommended, e.g. hashlinks
 [[CRYPTOGRAPHIC-HASHLINKS]](#ref:CRYPTOGRAPHIC-HASHLINKS).
 
+### Example
+
+Hashlink protected links to presentations:
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://identity.foundation/linked-vp/contexts/v1"
+  ],
+  "id": "did:example:123",
+  "verificationMethod": [{
+    "id": "did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A",
+    "type": "JsonWebKey2020",
+    "controller": "did:example:123",
+    "publicKeyJwk": {
+      "kty": "OKP",
+      "crv": "Ed25519",
+      "x": "VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ"
+    }
+  }],
+  "service": [
+    {
+      "id": "did:example:123#foo",
+      "type": "LinkedVerifiablePresentation",
+      "serviceEndpoint": ["https://bar.example.com/verifiable-presentation.jsonld?hl=z3aq31uzgnZBuWNzUB"]
+    },
+    {
+      "id": "did:example:123#baz",
+      "type": "LinkedVerifiablePresentation",
+      "serviceEndpoint": "ipfs://bafybeihkoviema7g3gxyt6la7vd5ho32ictqbilu3wnlo3rs7ewhnp7lly/verifiable-presentation.jwt?hl=z8guWNzUBnZBu3aq31"
+    }
+  ]
+}
+```
+
 ### Verification of Linked Presentations
 
 _This section is non-normative_
