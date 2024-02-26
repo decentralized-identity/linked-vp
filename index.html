@@ -379,15 +379,52 @@ indefinitely. A <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-
 utilizing the <code>expires</code> property that is an optional element of <code>proof</code> property as specified by
 <a href="#ref:VC-DATA-INTEGRITY" >[VC-DATA-INTEGRITY]</a> for presentations in JSON-LD format. Respectively, the property <code>exp</code> can
 be used for presentations in JWT format [<a class="spec-reference" href="#ref:RFC7519">RFC7519</a>].</p>
-<h3 id="verification-of-linked-presentations"><a class="toc-anchor" href="#verification-of-linked-presentations" >§</a> Verification of Linked Presentations</h3>
+<h3 id="protection-of-linked-presentations"><a class="toc-anchor" href="#protection-of-linked-presentations" >§</a> Protection of Linked Presentations</h3>
 <p><em>This section is non-normative</em></p>
 <p>Unlike the interactive exchange of credentials between <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-holders"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-holders" >holder</a> and <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-verifier"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-verifier" >verifier</a>, linked verifiable
 presentations are statically linked and published by the <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-holders"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-holders" >holder</a>. Any entity that knows the <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-holders"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-holders" >holder’s</a>
 DID is able to discover, access and verify the linked presentations without interaction between <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-holders"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-holders" >holder</a> and
-<a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-verifier"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-verifier" >verifier</a>. This flow requires additional caution from the <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-holders"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-holders" >holder</a> to ensure the integrity,
-authenticity and timeliness of linked presentations. The security properties <code>nonce</code>, <code>challenge</code>, and <code>domain</code> that are
-useful for interactive challenge-response protocols as specified by verifiable credential data
-<a href="#ref:VC-DATA-INTEGRITY" >[VC-DATA-INTEGRITY]</a> can not be used to secure linked presentations.</p>
+<a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-verifier"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-verifier" >verifier</a>. This flow requires additional caution from the <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-holders"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-holders" >holder</a> to ensure integrity, authenticity
+and timeliness of linked presentations. The security properties <code>nonce</code>, <code>challenge</code>, and <code>domain</code>, that are useful for
+interactive challenge-response protocols as specified by verifiable credential data
+<a href="#ref:VC-DATA-INTEGRITY" >[VC-DATA-INTEGRITY]</a>, can not be used to secure linked presentations. Therefore, it is
+recommended that the <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-holders"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-holders" >holder</a> signs every linked presentations cryptographically. In addtion, the use of
+mechanisms for protecting the integrity of the linked presentations’ content is recommended, e.g. hashlinks
+<a href="#ref:CRYPTOGRAPHIC-HASHLINKS" >[CRYPTOGRAPHIC-HASHLINKS]</a>.</p>
+<h3 id="example"><a class="toc-anchor" href="#example" >§</a> Example</h3>
+<p>Hashlink protected links to presentations:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"https://www.w3.org/ns/did/v1"</span><span class="token punctuation">,</span>
+    <span class="token string">"https://identity.foundation/linked-vp/contexts/v1"</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+  <span class="token property">"verificationMethod"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#_Qq0UL2Fq651Q0Fjd6TvnYE-faHiOpRlPVQcY_-tA4A"</span><span class="token punctuation">,</span>
+    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"JsonWebKey2020"</span><span class="token punctuation">,</span>
+    <span class="token property">"controller"</span><span class="token operator">:</span> <span class="token string">"did:example:123"</span><span class="token punctuation">,</span>
+    <span class="token property">"publicKeyJwk"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"kty"</span><span class="token operator">:</span> <span class="token string">"OKP"</span><span class="token punctuation">,</span>
+      <span class="token property">"crv"</span><span class="token operator">:</span> <span class="token string">"Ed25519"</span><span class="token punctuation">,</span>
+      <span class="token property">"x"</span><span class="token operator">:</span> <span class="token string">"VCpo2LMLhn6iWku8MKvSLg2ZAoC-nlOyPVQaO3FxVeQ"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"service"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#foo"</span><span class="token punctuation">,</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"LinkedVerifiablePresentation"</span><span class="token punctuation">,</span>
+      <span class="token property">"serviceEndpoint"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"https://bar.example.com/verifiable-presentation.jsonld?hl=z3aq31uzgnZBuWNzUB"</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#baz"</span><span class="token punctuation">,</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"LinkedVerifiablePresentation"</span><span class="token punctuation">,</span>
+      <span class="token property">"serviceEndpoint"</span><span class="token operator">:</span> <span class="token string">"ipfs://bafybeihkoviema7g3gxyt6la7vd5ho32ictqbilu3wnlo3rs7ewhnp7lly/verifiable-presentation.jwt?hl=z8guWNzUBnZBu3aq31"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="verification-of-linked-presentations"><a class="toc-anchor" href="#verification-of-linked-presentations" >§</a> Verification of Linked Presentations</h3>
+<p><em>This section is non-normative</em></p>
 <p>Independent of the successful verification of linked presentations, <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-verifier"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-verifier" >verifiers</a> should note that a linked
 verifiable presentation only proves control over the <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-holders"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-holders" >holder’s</a> DID at the time of link creation.
 <a path-0="www.w3.org"path-1="TR"path-2="vc-data-model-1.1"path-3="#dfn-verifier"href="https://www.w3.org/TR/vc-data-model-1.1/#dfn-verifier" >Verifiers</a> SHOULD NOT grant access solely based on a linked presentation and SHOULD in addition launch a
@@ -442,6 +479,11 @@ MUST comply with relevant normative statements in that section.</p>
 </p>
 <h3 id="informative-references"><a class="toc-anchor" href="#informative-references" >§</a> Informative References</h3>
 <dl>
+  <dt id="ref:CRYPTOGRAPHIC-HASHLINKS">CRYPTOGRAPHIC-HASHLINKS</dt>
+  <dd>
+    <cite><a href="https://w3c-ccg.github.io/hashlink/">Cryptographic Hyperlinks</a></cite>.
+        M. Sporny;  L. Rosenthal; 2021. <span class="reference-status">Status: Internet-Draft</span>
+  </dd>
   <dt id="ref:DID-CONFIGURATION">DID-CONFIGURATION</dt>
   <dd>
     <cite><a href="https://identity.foundation/.well-known/resources/did-configuration/">Well Known DID Configuration</a></cite>.
@@ -551,6 +593,8 @@ MUST comply with relevant normative statements in that section.</p>
 <ul>
 <li><a href="#acceptable-use" >Acceptable Use</a></li>
 <li><a href="#limiting-validity-of-verifiable-presentations" >Limiting Validity of Verifiable Presentations</a></li>
+<li><a href="#protection-of-linked-presentations" >Protection of Linked Presentations</a></li>
+<li><a href="#example" >Example</a></li>
 <li><a href="#verification-of-linked-presentations" >Verification of Linked Presentations</a></li>
 </ul>
 </li>
