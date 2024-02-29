@@ -428,21 +428,7 @@ specification are non-normative. Everything else in this specification is normat
 The keywords MAY, MUST, MUST NOT, and SHOULD in this document are to be interpreted as described in BCP 14
 [[spec-inform:RFC2119]] [[spec-inform:RFC8174]] when, and only when, they appear in all capitals, as shown here.
 
-This document contains examples that contain JSON and JSON-LD content. Some of these examples contain characters that
-are invalid, such as inline comments (//) and the use of ellipsis (...) to denote information that adds little value to
-the example. Implementers are cautioned to remove this content if they desire to use the information as valid JSON, or
-JSON-LD.
-
-A DID Configuration URI is any concrete expression of the rules specified in Section DID Configuration URI and MUST
-comply with relevant normative statements in that section.
-
-A DID Configuration Resource is any concrete expression of the rules specified in Section DID Configuration Resource and
-MUST comply with relevant normative statements in that section.
-
-A Domain Linkage Credential is any concrete expression of the rules specified in Section Domain Linkage Credential and
-MUST comply with relevant normative statements in that section.
-
-Implementations MUST comply with relevant normative statements in DID Configuration Resource Verification
+Implementations MUST comply with relevant normative statements in DID Configuration Resource Verification.
 
 ## References
 
