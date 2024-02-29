@@ -38,8 +38,8 @@ Verifiable Credentials are designed to be shared between entities. How this is d
 is specified by protocols like [[DIDComm]](#ref:DIDCOMM-MESSAGING) and
 [[OIDC4VC]](#ref:OPENID-4-VERIFIABLE-CREDENTIAL-ISSUANCE). This document complements the private communication channel
 by defining how to share, discover and retrieve Verifiable Credentials publicly via a service entry in a "DID Document".
-It is worth noting that incorporating private presentations should be relied on more frequently for enhanced privacy
-and security, rather than solely depending on public methods.
+It is worth noting that incorporating private presentations should be relied on more frequently for enhanced privacy and
+security, rather than solely depending on public methods.
 
 The Verifiable Credentials specification supports multiple different identifiers. This specification does NOT specify
 how to publish Verifiable Credentials for other valid identifiers apart from DIDs. Furthermore, this specification does
@@ -488,6 +488,9 @@ Implementations MUST comply with relevant normative statements in DID Configurat
 [[spec-inform]]
 
 ## Acknowledgements
+
+We thank the Decentralized Identity Foundation and the Identity and Discovery working group for their support in this
+specification.
 
 ## Appendix
 
