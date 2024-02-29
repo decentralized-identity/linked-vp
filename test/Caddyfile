@@ -1,0 +1,42 @@
+# Documentation: https://caddyserver.com/docs/caddyfile/directives
+
+{
+  http_port 8080
+  https_port 8443
+}
+
+id-no-presentation.localhost {
+  file_server {
+    root ./websites/id-no-presentation.localhost
+  }
+  tls {
+    load ./website-certificates/id-no-presentation.localhost.pem
+  }
+}
+
+id-presentation.localhost {
+  file_server {
+    root ./websites/id-presentation.localhost
+  }
+  tls {
+    load ./website-certificates/id-presentation.localhost.pem
+  }
+}
+
+id-presentations.localhost {
+  file_server {
+    root ./websites/id-presentations.localhost
+  }
+  tls {
+    load ./website-certificates/id-presentations.localhost.pem
+  }
+}
+
+no-id.localhost {
+  file_server {
+    root ./websites/no-id.localhost
+  }
+  tls {
+    load ./website-certificates/no-id.localhost.pem
+  }
+}
