@@ -1,0 +1,48 @@
+{
+  "@context":
+  [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://w3id.org/security/suites/ed25519-2020/v1"
+  ],
+  "type":
+  [
+    "VerifiablePresentation"
+  ],
+  "verifiableCredential":
+  [
+    {
+      "@context":
+      [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1"
+      ],
+      "type":
+      [
+        "VerifiableCredential"
+      ],
+      "credentialSubject":
+      {
+        "id": "did:web:id-presentations.localhost%3A8443"
+      },
+      "issuer": "did:web:id-presentations.localhost%3A8443",
+      "issuanceDate": "2024-02-29T08:16:31Z",
+      "proof":
+      {
+        "type": "Ed25519Signature2020",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "z25i3aJYU5iFaZHLF91pf7uMuaEAmjNd7VQemYU64S3UBLPcWnvSH4h96jRG35QNHUJLKr1Udg4VNXqSBiLirvPHL",
+        "verificationMethod": "did:web:id-presentations.localhost%3A8443#OaxSeS3-GpScxMKyKElLUo0Fs7IFKPfxlvqvU7zjUXk",
+        "created": "2024-02-29T08:16:31.311965775Z"
+      }
+    }
+  ],
+  "proof":
+  {
+    "type": "Ed25519Signature2020",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z5q8rwWMtkgQPbfG74Ewqne1pcqYcDESd7RFFmbodJsdLPwhaQNPjfyZhDp8u5YXzdFQmwGAP1WctzUtQx8YCZk3w",
+    "verificationMethod": "did:web:id-presentations.localhost%3A8443#OaxSeS3-GpScxMKyKElLUo0Fs7IFKPfxlvqvU7zjUXk",
+    "created": "2024-02-29T08:16:31.498844337Z"
+  },
+  "holder": "did:web:id-presentations.localhost%3A8443"
+}

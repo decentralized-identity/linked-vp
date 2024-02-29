@@ -1,0 +1,49 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://identity.foundation/linked-vp/contexts/v1",
+    "https://w3id.org/security/suites/ed25519-2020/v1",
+    {
+      "publicKeyJwk": {
+        "@id": "https://w3id.org/security#publicKeyJwk",
+        "@type": "@json"
+      }
+    }
+  ],
+  "id": "did:web:id-presentations.localhost%3A8443",
+  "verificationMethod": [
+    {
+      "id": "did:web:id-presentations.localhost%3A8443#OaxSeS3-GpScxMKyKElLUo0Fs7IFKPfxlvqvU7zjUXk",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:web:id-presentations.localhost%3A8443",
+      "publicKeyJwk": {
+        "kty": "OKP",
+        "kid": "OaxSeS3-GpScxMKyKElLUo0Fs7IFKPfxlvqvU7zjUXk",
+        "crv": "Ed25519",
+        "alg": "EdDSA",
+        "x": "lxIm5yVS9FoZzUePgNsXBZxSsTkGaJJLNrWxZrIHjFw"
+      }
+    }
+  ],
+  "authentication": [
+    "did:web:id-presentations.localhost%3A8443#OaxSeS3-GpScxMKyKElLUo0Fs7IFKPfxlvqvU7zjUXk"
+  ],
+  "assertionMethod": [
+    "did:web:id-presentations.localhost%3A8443#OaxSeS3-GpScxMKyKElLUo0Fs7IFKPfxlvqvU7zjUXk"
+  ],
+  "service": [
+    {
+      "id": "did:web:id-presentations.localhost%3A8443#1",
+      "type": "LinkedVerifiablePresentation",
+      "serviceEndpoint": "https://id-presentations.localhost:8443/.well-known/presentation1.json"
+    },
+    {
+      "id": "did:web:id-presentations.localhost%3A8443#2",
+      "type": "LinkedVerifiablePresentation",
+      "serviceEndpoint": [
+        "https://id-presentations.localhost:8443/.well-known/presentation2.json",
+        "https://id-presentations.localhost:8443/.well-known/presentation3.json"
+      ]
+    }
+  ]
+}

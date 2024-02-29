@@ -1,0 +1,28 @@
+<h1>DID with multiple presentations</h1>
+
+<h2>Sites</h2>
+
+<ul>
+  <li><a href="https://id-no-presentation.localhost:8443">No linked presentation.</a></li>
+  <li><a href="https://id-presentation.localhost:8443">One linked presentation.</a></li>
+  <li><a href="https://id-presentations.localhost:8443">Multiple linked presentations.</a></li>
+  <li><a href="https://no-id.localhost:8443">No DID</a></li>
+</ul>
+
+<h2>Files</h2>
+
+<ul>
+  <li><a href=".well-known/did.json">.well-known/did.json</a></li>
+  <li><a href=".well-known/presentation1.json">.well-known/presentation1.json</a></li>
+  <li><a href=".well-known/presentation2.json">.well-known/presentation2.json</a></li>
+  <li><a href=".well-known/presentation3.json">.well-known/presentation3.json</a></li>
+</ul>
+
+<h2>Expected Test Result</h2>
+
+<ul>
+  <li>Two LinkedVerifiablePresentation service endpoints.</li>
+  <li>One service endpoint that links to one presentation as string.</li>
+  <li>One service endpoint that links to two presentation as list of strings.</li>
+  <li>Three presentations in total.</li>
+</ul>
