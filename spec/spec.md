@@ -9,8 +9,6 @@
 
 ~ [Jan Christoph Ebersbach](https://www.linkedin.com/in/JCEbersbach) (identinet)
 
-~ Others?
-
 <!-- -->
 
 **Authors:**
@@ -20,8 +18,6 @@
 ~ [Brian Richter](https://www.linkedin.com/in/brianrichter3) (Aviary Tech)
 
 ~ [Markus Sabadello](https://www.linkedin.com/in/markus-sabadello-353a0821) (Danube Tech)
-
-~ Others?
 
 <!-- -->
 
