@@ -1,9 +1,11 @@
-# Linked Verifiable Presentation v1.0.0
+# Linked Verifiable Presentation v1.x.x
 
-**Specification Status:**
-[DIF Ratified Specification](https://github.com/decentralized-identity/org/blob/master/work-item-lifecycle.md)
+**Specification Status:** Pre-Draft
 
 **Latest Draft:** [identity.foundation/linked-vp](https://identity.foundation/linked-vp)
+
+**Ratified Versions:**
+~ **v1.0.0** - [https://identity.foundation/linked-vp/spec/v1.0.0](https://identity.foundation/linked-vp/spec/v1.0.0)
 
 **Editors:**
 
