@@ -1,7 +1,7 @@
 {
   "name": "linked-vp",
-  "version": "0.4.0",
-  "description": "Linked Verifiable Presentation Specification",
+  "version": "1.0.0",
+  "description": "Linked Verifiable Presentation",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/decentralized-identity/linked-vp.git"
@@ -15,6 +15,14 @@
     "url": "https://github.com/decentralized-identity/linked-vp/issues"
   },
   "scripts": {
-    "edit": "node -e \"require('spec-up')()\""
+    "render": "npm run build",
+    "edit": "npm run dev",
+    "build": "npm run clean && npm run resources && npm run build:specs",
+    "build:specs": "node -e \"require('spec-up')({ nowatch: true })\"",
+    "dev": "npm run clean && npm run resources && npm run dev:specs",
+    "dev:specs": "node -e \"require('spec-up')()\"",
+    "resources": "cp -r contexts build/",
+    "clean": "rm -rf build && mkdir build",
+    "test": "cd resources/linked-vp/generate-config && npm test"
   }
 }

@@ -1,17 +1,19 @@
-name: CI
+# Documentation: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+name: Test
 
-on: [push]
+on:
+  push:
+    paths:
+      - "resources/linked-vp/generate-config/**"
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     env:
       working-directory: ./resources/linked-vp/generate-config
-
     strategy:
       matrix:
         node-version: [20.x]
-
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
