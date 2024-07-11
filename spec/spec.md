@@ -1,6 +1,6 @@
 # Linked Verifiable Presentation v1.x.x
 
-**Specification Status:** Pre-Draft
+**Specification Status:** [Pre-Draft](https://github.com/decentralized-identity/org/blob/master/work-item-lifecycle.md)
 
 **Latest Draft:** [identity.foundation/linked-vp](https://identity.foundation/linked-vp)
 
