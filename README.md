@@ -4,9 +4,10 @@ The Linked Verifiable Presentation specification defines how to share, discover 
 publicly via a service entry in a "DID Document". It complements existing technologies for sharing Verifiable
 Credentials privately, like DIDComm Messaging and OIDC4VC.
 
-- Latest published version: <https://identity.foundation/linked-vp>.
+- Latest published version: <https://identity.foundation/linked-vp>
 - Contribute: <https://github.com/decentralized-identity/linked-vp>
-- Specification source file: [`./spec/spec.md`](./spec/spec.md).
+- Specification source file: [`./spec/spec.md`](./spec/spec.md)
+- Walkthrough /demo [here](https://youtu.be/JQeZg3kYFiY) (DIF Youtube)
 
 ## Conformance Testing
 
